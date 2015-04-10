@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using System.Threading;
 #endregion
 
 namespace Project_Kickass
@@ -37,6 +38,7 @@ namespace Project_Kickass
         Texture2D projectile;
         Rectangle titleSize;
         Rectangle healthBarSize;
+        Thread t1;
 
         Vector2 projPos; 
 
@@ -44,6 +46,7 @@ namespace Project_Kickass
         Boolean isShot;
 
         GameBoard board;
+        Character char1;
 
         // keyboard state attribute
         KeyboardState kState; 
@@ -88,6 +91,8 @@ namespace Project_Kickass
             titleSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height); // creates a Rectangle object to set the size of the title screen to
             healthBar = Content.Load<Texture2D>("HealthBar.png"); // loads the title screen
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
+            char1 = new Character(0, 0, 100, 1, character);
+            
         }
 
         /*
@@ -144,56 +149,57 @@ namespace Project_Kickass
             // TODO: Add your update logic here
             kState = Keyboard.GetState();
 
-            // check for user input
-            if(kState.IsKeyDown(Keys.W))
-            {
-                characterPos.Y = characterPos.Y - 75;
-            }
+            char1.Input(kState);
+            //// check for user input
+            //if(kState.IsKeyDown(Keys.W))
+            //{
+            //    characterPos.Y = characterPos.Y - 75;
+            //}
 
-            if (kState.IsKeyDown(Keys.S))
-            {
-                characterPos.Y = characterPos.Y + 75;
-            }
+            //if (kState.IsKeyDown(Keys.S))
+            //{
+            //    characterPos.Y = characterPos.Y + 75;
+            //}
 
-            if (kState.IsKeyDown(Keys.A))
-            {
-                characterPos.X = characterPos.X - 15;
-            }
+            //if (kState.IsKeyDown(Keys.A))
+            //{
+            //    characterPos.X = characterPos.X - 15;
+            //}
 
-            if (kState.IsKeyDown(Keys.D))
-            {
-                characterPos.X = characterPos.X + 15; 
-            }
+            //if (kState.IsKeyDown(Keys.D))
+            //{
+            //    characterPos.X = characterPos.X + 15; 
+            //}
 
             if (kState.IsKeyDown(Keys.Space))
             {
                 isActive = true; 
             }
 
-            if(kState.IsKeyDown(Keys.LeftControl))
-            {
-                isShot = true;
-            }
+            //if(kState.IsKeyDown(Keys.LeftControl))
+            //{
+            //    isShot = true;
+            //}
 
-            if(characterPos.X < 0)
-            {
-                characterPos.X = 0; 
-            }
+            //if(characterPos.X < 0)
+            //{
+            //    characterPos.X = 0; 
+            //}
 
-            if (characterPos.X > 400 - (0.4 * character.Width))
-            {
-                characterPos.X = 400 - (0.4f * character.Width);
-            }
+            //if (characterPos.X > 400 - (0.4 * character.Width))
+            //{
+            //    characterPos.X = 400 - (0.4f * character.Width);
+            //}
 
-            if(characterPos.Y < 65)
-            {
-                characterPos.Y = 65;
-            }
+            //if(characterPos.Y < 65)
+            //{
+            //    characterPos.Y = 65;
+            //}
 
-            if(characterPos.Y > 275)
-            {
-                characterPos.Y = 275;
-            }
+            //if(characterPos.Y > 275)
+            //{
+            //    characterPos.Y = 275;
+            //}
 
             base.Update(gameTime);
         }
@@ -209,7 +215,8 @@ namespace Project_Kickass
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             board.Draw(spriteBatch);
-            spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
+            //spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
+            char1.Draw(spriteBatch);
 
             if(isShot == true)
             {

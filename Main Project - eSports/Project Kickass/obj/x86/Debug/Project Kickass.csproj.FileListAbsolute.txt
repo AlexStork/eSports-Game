@@ -98,3 +98,14 @@ D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project
 D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
 D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
 D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.pdb
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.pdb
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\HealthBar.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Panels HD.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreenPlaceHolder.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
