@@ -28,6 +28,8 @@ namespace Project_Kickass
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // here is a comment solely for github testing purposes so remove this shit at some point, k? 
+
         // asset attributes
         Texture2D titleScreen; // the title screen
         Texture2D healthBar; // the health bar
