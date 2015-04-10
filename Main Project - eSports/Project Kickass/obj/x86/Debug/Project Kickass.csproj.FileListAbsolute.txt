@@ -83,18 +83,19 @@ C:\Users\Steven\Documents\Class\Code\Project 2\Main Project\Project Kickass\obj\
 C:\Users\Steven\Documents\Class\Code\Project 2\Main Project\Project Kickass\obj\x86\Debug\Project Kickass.pdb
 J:\Code\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
 J:\Code\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.pdb
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\HealthBar.png
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Panels HD.png
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreenPlaceHolder.png
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Lidgren.Network.dll
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\MonoGame.Framework.dll
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\OpenTK.dll
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Tao.Sdl.dll
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
-D:\Users\adm6649\Downloads\Main Project - eSports\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.pdb
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.pdb
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\HealthBar.png
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Panels HD.png
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreenPlaceHolder.png
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
+D:\Users\ak3012\Documents\Visual Studio 2013\Projects\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\PauseScreenTemp.png

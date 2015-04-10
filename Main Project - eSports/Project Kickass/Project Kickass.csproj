@@ -66,6 +66,9 @@
     <Content Include="Content\Panels HD.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\PauseScreenTemp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Projectile Sprite.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
