@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using System.Threading;
+using System.IO;
 #endregion
 
 namespace Project_Kickass
@@ -51,7 +52,12 @@ namespace Project_Kickass
         int gameState = 0;
 
         // keyboard state attribute
-        KeyboardState kState; 
+        KeyboardState kState;
+
+        //Ignis External Tool
+        StreamReader input = new StreamReader("ignis.txt");
+        int ignisHP = 0;
+        int ignisProjDmg = 0;
 
         public Game1()
             : base()
@@ -97,6 +103,18 @@ namespace Project_Kickass
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
             pauseScreen = Content.Load<Texture2D>("PauseScreenTemp.png"); // loads the pause screen
             pauseSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the pause screen to the size of the screen
+
+            //External Tool Values ----------------------------------------------
+            //Read in Health
+            string inputLine = input.ReadLine();
+            int.TryParse(inputLine, out ignisHP);
+
+            //Read in Projectile Damage
+            inputLine = input.ReadLine();
+            int.TryParse(inputLine, out ignisProjDmg);
+
+            input.Close();
+            //-------------------------------------------------------------------
         }
 
         /*
