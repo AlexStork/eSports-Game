@@ -42,9 +42,7 @@ namespace Project_Kickass
         Texture2D projectile;
         Rectangle titleSize;
         Rectangle healthBarSize;
-        Thread t1;
-        Rectangle pauseSize;
-        Vector2 projPos; 
+        Rectangle pauseSize; 
         Boolean isActive;
         Boolean isShot;
         GameBoard board;
@@ -160,35 +158,7 @@ namespace Project_Kickass
                 char1.Input(kState);
                 char2.Input(kState);
             }
-            //// check for user input
-            //if(kState.IsKeyDown(Keys.W))
-            //{
-            //    characterPos.Y = characterPos.Y - 75;
-            //}
-
-            //if (kState.IsKeyDown(Keys.S))
-            //{
-            //    characterPos.Y = characterPos.Y + 75;
-            //}
-
-            //if (kState.IsKeyDown(Keys.A))
-            //{
-            //    characterPos.X = characterPos.X - 15;
-            //}
-
-
-            //if (kState.IsKeyDown(Keys.D))
-            //{
-            //    characterPos.X = characterPos.X + 15; 
-            //}
-
-            //if (kState.IsKeyDown(Keys.D))
-            //{
-            //    characterPos.X = characterPos.X + 15; 
-            //}
             
-
-
             if (kState.IsKeyDown(Keys.Space)) // sets the gameState to active
             {
                 isActive = true;
@@ -203,31 +173,6 @@ namespace Project_Kickass
                 }
                 else gameState = 1;
             }
-
-            //if(kState.IsKeyDown(Keys.LeftControl))
-            //{
-            //    isShot = true;
-            //}
-
-            //if(characterPos.X < 0)
-            //{
-            //    characterPos.X = 0; 
-            //}
-
-            //if (characterPos.X > 400 - (0.4 * character.Width))
-            //{
-            //    characterPos.X = 400 - (0.4f * character.Width);
-            //}
-
-            //if(characterPos.Y < 65)
-            //{
-            //    characterPos.Y = 65;
-            //}
-
-            //if(characterPos.Y > 275)
-            //{
-            //    characterPos.Y = 275;
-            //}
 
             base.Update(gameTime);
         }

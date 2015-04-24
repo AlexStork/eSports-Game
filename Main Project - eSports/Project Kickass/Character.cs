@@ -132,9 +132,7 @@ namespace Project_Kickass
                 {
                     bullet.Fire();
                 }
-
-                //checks to see if key has been released
-                
+ 
             }
 
             //player 2 right side of board
