@@ -30,26 +30,35 @@ namespace Project_Kickass
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // here is a comment solely for github testing purposes so remove this shit at some point, k? 
-
         // asset attributes
         Texture2D titleScreen; // the title screen
         Texture2D healthBar; // the health bar
+        Texture2D health; // the health of each player
         Texture2D tile;
         Texture2D character;
         Texture2D character2;
         Texture2D pauseScreen;
+        Texture2D background;
+        Texture2D frame;
+        Texture2D sel1;
+        Texture2D sel2;
         Vector2 characterPos;
         Texture2D projectile;
         Rectangle titleSize;
         Rectangle healthBarSize;
-        Rectangle pauseSize; 
-        Boolean isActive;
+        Rectangle backgroundSize;
+        Rectangle frame1Size;
+        Rectangle frame2Size;
+        Rectangle sel1Size;
+        Rectangle pauseSize;
+        Rectangle health1Size;
+        Rectangle health2Size;
         Boolean isShot;
         GameBoard board;
         Character char1;
         Character char2;
         int gameState = 0;
+        bool canToggle;
 
         // keyboard state attribute
         KeyboardState kState;
@@ -88,21 +97,41 @@ namespace Project_Kickass
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            // stage stuff
             tile = Content.Load<Texture2D>("Panels HD.png");
+            board = new GameBoard(tile);
+
+            // character stuff
             character = Content.Load<Texture2D>("Standing Sprite.png");
             character2 = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
-            board = new GameBoard(tile);
             characterPos = new Vector2(7, 75);
-            titleScreen = Content.Load<Texture2D>("TitleScreenPlaceHolder.png"); // loads the title screen
-            titleSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height); // creates a Rectangle object to set the size of the title screen to the size of the screen
-            healthBar = Content.Load<Texture2D>("HealthBar.png"); // loads the title screen
-            healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
             char1 = new Character(0, 0, 100, 1, character);
             char2 = new Character(0, 7, 100, 2, character2);
-            healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
+
+            // screen stuff
+            titleScreen = Content.Load<Texture2D>("TitleScreen.png"); // loads the title screen
+            titleSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height); // creates a Rectangle object to set the size of the title screen to the size of the screen
             pauseScreen = Content.Load<Texture2D>("PauseScreenTemp.png"); // loads the pause screen
             pauseSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the pause screen to the size of the screen
+            background = Content.Load<Texture2D>("Background.png"); // loads the background screen
+            backgroundSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the background screen to the size of the screen
+
+            // health bar stuff
+            healthBar = Content.Load<Texture2D>("HealthBar.png"); // loads the health bar
+            healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
+            health = Content.Load<Texture2D>("Health.png"); // loads the player health 
+            health1Size = new Rectangle(0, 28, 600, 52); // creates a Rectangle object to set the size of player 1's health to
+            health2Size = new Rectangle(500, 28, 600, 52); // creates a Rectangle object to set the size of player 2's health to
+            healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
+
+            // character select stuff
+            frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
+            //(to do later) frame1Size = new Rectangle(100, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
+            //(to do later) frame2Size = new Rectangle(500, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
+            sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
+            sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
+            //(to do later) sel1Size = new Rectangle(0, 0, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
 
             //External Tool Values ----------------------------------------------
             //Read in Health
@@ -169,27 +198,49 @@ namespace Project_Kickass
                 Exit();
 
             // TODO: Add your update logic here
-            kState = Keyboard.GetState();
+            kState = Keyboard.GetState();           
 
-            if (gameState == 1)
+            if (gameState == 2) // gameState has to be 'active' for commands to register
             {
                 char1.Input(kState);
                 char2.Input(kState);
             }
-            
-            if (kState.IsKeyDown(Keys.Space)) // sets the gameState to active
+
+            if (gameState == 0)
             {
-                isActive = true;
-                gameState = 1;
+                if (kState.IsKeyDown(Keys.Enter)) // sets the gameState to character select
+                {
+                    gameState = 1;
+
+                }
             }
 
-            if (kState.IsKeyDown(Keys.Tab)) // sets the gameState to paused if active and active if paused
+            if (gameState == 1)
             {
-                if (isActive == true)
+                if (kState.IsKeyDown(Keys.Space)) // sets the gameState to active
                 {
                     gameState = 2;
                 }
-                else gameState = 1;
+            }
+
+            if (gameState == 2 && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if active and player presses tab, pause
+            {
+                canToggle = false;
+                gameState = 3;
+            }
+
+            if (gameState == 3 && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if paused and player presses tab, unpause
+            {
+                canToggle = false;
+                gameState = 2;
+            }
+
+            if (gameState == 2 || gameState == 3)
+            {
+                if (kState.IsKeyUp(Keys.Tab))
+                {
+                    canToggle = true;
+                }
             }
 
             base.Update(gameTime);
@@ -216,25 +267,36 @@ namespace Project_Kickass
                     spriteBatch.Draw(titleScreen, titleSize, Color.White);
                     break;
 
-                case 1: // active gameState
-                    if(isShot == true)
+                case 1: // character select screen
+                    spriteBatch.Draw(background, backgroundSize, Color.White);
+                    //spriteBatch.Draw(sel1, sel1Size, Color.White);
+                    //spriteBatch.Draw(frame, frame1Size, Color.White);
+                    //spriteBatch.Draw(frame, frame2Size, Color.White);
+                    break;
+
+                case 2: // active gameState
+                    if (isShot == true)
                     {
                         for (int i = 1; i < 800; i++)
                         {
                             spriteBatch.Draw(projectile, new Vector2((float)characterPos.X + i, (float)characterPos.Y), Color.White);
-                            isShot = false; 
+                            isShot = false;
                         }
                     }
-                    
-                    spriteBatch.Draw(healthBar, healthBarSize, Color.White);
 
+
+                    spriteBatch.Draw(health, health1Size, Color.White);
+                    spriteBatch.Draw(health, health2Size, Color.White);
+                    spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     break;
 
-                case 2: // pause gameState
+                case 3: // pause gameState
+                    
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     spriteBatch.Draw(pauseScreen, pauseSize, Color.White);
                     break;
             }
+
 
             spriteBatch.End();
 

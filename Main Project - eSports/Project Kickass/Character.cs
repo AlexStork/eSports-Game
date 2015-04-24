@@ -18,6 +18,7 @@ namespace Project_Kickass
         private int xPos;
         private int yPos;
         private int health;
+        private int maxHealth;
         private int player; //tells which player controls character
         private Projectile bullet;
         private Texture2D skin;
