@@ -72,6 +72,9 @@
     <Content Include="Content\Projectile Sprite.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Scaled Character 1 Standing Sprite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Standing Sprite.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

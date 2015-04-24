@@ -36,6 +36,7 @@ namespace Project_Kickass
         Texture2D healthBar; // the health bar
         Texture2D tile;
         Texture2D character;
+        Texture2D character2;
         Texture2D pauseScreen;
         Vector2 characterPos;
         Texture2D projectile;
@@ -48,6 +49,7 @@ namespace Project_Kickass
         Boolean isShot;
         GameBoard board;
         Character char1;
+        Character char2;
         int gameState = 0;
 
         // keyboard state attribute
@@ -84,6 +86,7 @@ namespace Project_Kickass
             // TODO: use this.Content to load your game content here
             tile = Content.Load<Texture2D>("Panels HD.png");
             character = Content.Load<Texture2D>("Standing Sprite.png");
+            character2 = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             board = new GameBoard(tile);
             characterPos = new Vector2(7, 75);
@@ -92,6 +95,7 @@ namespace Project_Kickass
             healthBar = Content.Load<Texture2D>("HealthBar.png"); // loads the title screen
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
             char1 = new Character(0, 0, 100, 1, character);
+            char2 = new Character(0, 7, 100, 2, character2);
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
             pauseScreen = Content.Load<Texture2D>("PauseScreenTemp.png"); // loads the pause screen
             pauseSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the pause screen to the size of the screen
@@ -150,7 +154,12 @@ namespace Project_Kickass
 
             // TODO: Add your update logic here
             kState = Keyboard.GetState();
-            char1.Input(kState);
+
+            if (gameState == 1)
+            {
+                char1.Input(kState);
+                char2.Input(kState);
+            }
             //// check for user input
             //if(kState.IsKeyDown(Keys.W))
             //{
@@ -173,10 +182,10 @@ namespace Project_Kickass
             //    characterPos.X = characterPos.X + 15; 
             //}
 
-            if (kState.IsKeyDown(Keys.D))
-            {
-                characterPos.X = characterPos.X + 15; 
-            }
+            //if (kState.IsKeyDown(Keys.D))
+            //{
+            //    characterPos.X = characterPos.X + 15; 
+            //}
             
 
 
@@ -235,7 +244,8 @@ namespace Project_Kickass
             spriteBatch.Begin();
             board.Draw(spriteBatch);
             //spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-            char1.Draw(spriteBatch);
+            char1.Draw(spriteBatch,GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            char2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
             switch (gameState)
             {

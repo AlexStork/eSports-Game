@@ -21,6 +21,8 @@ namespace Project_Kickass
         private int player; //tells which player controls character
         private Projectile bullet;
         private Texture2D skin;
+        private bool canMove = true; // tells whether character can move
+        private string keyPress = ""; // stores which key was pressed
 
         //properties for attributes
         public int XPos { get { return xPos; } }
@@ -44,83 +46,186 @@ namespace Project_Kickass
             //player 1, left side of the board
             if (player == 1)
             {
-                if (kstate.IsKeyDown(Keys.W))
+                if (canMove == true)
                 {
-                    if (yPos > 0)
+                    if (kstate.IsKeyDown(Keys.W))
                     {
-                        yPos--;
+                        if (yPos > 0)
+                        {
+                            yPos--;
+                            canMove = false;
+                            keyPress = "w";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.A))
+                    {
+                        if (xPos > 0)
+                        {
+                            xPos--;
+                            canMove = false;
+                            keyPress = "a";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.S))
+                    {
+                        if (yPos < 3)
+                        {
+                            yPos++;
+                            canMove = false;
+                            keyPress = "s";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.D))
+                    {
+                        if (xPos < 3)
+                        {
+                            xPos++;
+                            canMove = false;
+                            keyPress = "d";
+                        }
                     }
                 }
 
-                if (kstate.IsKeyDown(Keys.A))
+                switch (keyPress)
                 {
-                    if (xPos > 0)
-                    {
-                        xPos--;
-                    }
-                }
+                    case "w":
+                        {
+                            if(kstate.IsKeyUp(Keys.W))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
+                    
+                    case "a":
+                        {
+                            if (kstate.IsKeyUp(Keys.A))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
 
-                if (kstate.IsKeyDown(Keys.S))
-                {
-                    if (yPos < 3)
-                    {
-                        yPos++;
-                    }
-                }
+                    case "s":
+                        {
+                            if (kstate.IsKeyUp(Keys.S))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
 
-                if (kstate.IsKeyDown(Keys.D))
-                {
-                    if (xPos < 3)
-                    {
-                        xPos++;
-                    }
+                    case "d":
+                        {
+                            if (kstate.IsKeyUp(Keys.D))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
                 }
 
                 if (kstate.IsKeyDown(Keys.F))
                 {
                     bullet.Fire();
                 }
+
+                //checks to see if key has been released
+                
             }
 
             //player 2 right side of board
             //player 1, left side of the board
-            if (player == 1)
+            if (player == 2)
             {
-                if (kstate.IsKeyDown(Keys.I))
+                if (canMove == true)
                 {
-                    if (yPos < 4)
+                    if (kstate.IsKeyDown(Keys.I))
                     {
-                        yPos++;
+                        if (yPos < 7)
+                        {
+                            yPos++;
+                            canMove = false;
+                            keyPress = "i";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.L))
+                    {
+                        if (xPos > 0)
+                        {
+                            xPos--;
+                            canMove = false;
+                            keyPress = "l";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.K))
+                    {
+                        if (yPos > 4)
+                        {
+                            yPos--;
+                            canMove = false;
+                            keyPress = "k";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.J))
+                    {
+                        if (xPos < 3)
+                        {
+                            xPos++;
+                            canMove = false;
+                            keyPress = "j";
+                        }
+                    }
+
+                    if (kstate.IsKeyDown(Keys.H))
+                    {
+                        bullet.Fire();
                     }
                 }
 
-                if (kstate.IsKeyDown(Keys.J))
+                switch (keyPress)
                 {
-                    if (xPos > 0)
-                    {
-                        xPos--;
-                    }
-                }
+                    case "i":
+                        {
+                            if (kstate.IsKeyUp(Keys.I))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
 
-                if (kstate.IsKeyDown(Keys.K))
-                {
-                    if (yPos > 0)
-                    {
-                        yPos--;
-                    }
-                }
+                    case "k":
+                        {
+                            if (kstate.IsKeyUp(Keys.K))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
 
-                if (kstate.IsKeyDown(Keys.L))
-                {
-                    if (xPos < 4)
-                    {
-                        xPos++;
-                    }
-                }
+                    case "j":
+                        {
+                            if (kstate.IsKeyUp(Keys.J))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
 
-                if (kstate.IsKeyDown(Keys.H))
-                {
-                    bullet.Fire();
+                    case "l":
+                        {
+                            if (kstate.IsKeyUp(Keys.L))
+                            {
+                                canMove = true;
+                            }
+                            break;
+                        }
                 }
             }
         }
@@ -132,7 +237,7 @@ namespace Project_Kickass
         }
 
         //Draw method
-        public void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spritebatch,int width, int height)
         {
             //draws in different spaces based on which tile in the grid the character occupies
             if(player == 1)
@@ -236,22 +341,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 90), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 190), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 290), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 390), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
                 }
 
@@ -259,22 +364,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 90), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 190), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 290), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 390), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
                 }
 
@@ -282,22 +387,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 90), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 190), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 290), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 390), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
                 }
 
@@ -305,22 +410,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 90), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 190), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 290), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(skin, new Vector2((width - 390), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
                     }
                 }
             }
