@@ -22,8 +22,16 @@ namespace Project_Kickass
     /// //Steven Ma
     /// 
     /// ****Controls****
+    /// Player 1:
     /// WASD Keys
-    /// Left Ctrl to fire
+    /// 
+    /// Player 2:
+    /// IJKL Keys
+    /// 
+    /// ****IMPORTANT********IMPORTANT****
+    /// To progress to game from the main menu:
+    /// Press space then enter
+    /// 
     /// </summary>
     public class Game1 : Game
     {
@@ -42,6 +50,9 @@ namespace Project_Kickass
         Texture2D frame;
         Texture2D sel1;
         Texture2D sel2;
+        Texture2D ignisTN;
+        Texture2D char05TN;
+        public Texture2D projSkin;
         Vector2 characterPos;
         Texture2D projectile;
         Rectangle titleSize;
@@ -50,9 +61,12 @@ namespace Project_Kickass
         Rectangle frame1Size;
         Rectangle frame2Size;
         Rectangle sel1Size;
+        Rectangle sel2Size;
         Rectangle pauseSize;
         Rectangle health1Size;
         Rectangle health2Size;
+        Rectangle ignisTNRect;
+        Rectangle char05TNRect;
         Boolean isShot;
         GameBoard board;
         Character char1;
@@ -108,6 +122,10 @@ namespace Project_Kickass
             characterPos = new Vector2(7, 75);
             char1 = new Character(0, 0, 100, 1, character);
             char2 = new Character(0, 7, 100, 2, character2);
+            ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
+            ignisTNRect = new Rectangle(510, 108, 140, 80);
+            char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
+            char05TNRect = new Rectangle(110, 108, 140, 80);
 
             // screen stuff
             titleScreen = Content.Load<Texture2D>("TitleScreen.png"); // loads the title screen
@@ -116,6 +134,9 @@ namespace Project_Kickass
             pauseSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the pause screen to the size of the screen
             background = Content.Load<Texture2D>("Background.png"); // loads the background screen
             backgroundSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the background screen to the size of the screen
+
+            // projectile stuff
+            projSkin = Content.Load<Texture2D>("Proj1Fireball.png");
 
             // health bar stuff
             healthBar = Content.Load<Texture2D>("HealthBar.png"); // loads the health bar
@@ -127,11 +148,12 @@ namespace Project_Kickass
 
             // character select stuff
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
-            //(to do later) frame1Size = new Rectangle(100, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
-            //(to do later) frame2Size = new Rectangle(500, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
+            frame1Size = new Rectangle(100, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
+            frame2Size = new Rectangle(500, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
             sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
-            //(to do later) sel1Size = new Rectangle(0, 0, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
+            sel1Size = new Rectangle(96, 73, 168, 126); // creates a Rectangle object to set the size of the character selector frame
+            sel2Size = new Rectangle(496, 73, 168, 126); // creates a Rectangle object to set the size of the character selector frame
 
             //External Tool Values ----------------------------------------------
             //Read in Health
@@ -146,37 +168,7 @@ namespace Project_Kickass
             //-------------------------------------------------------------------
         }
 
-        /*
-            //For use at a later date
-            StreamReader input = new StreamReader("charData.txt");
-            int xPos = 0;
-            int yPos = 0;
-            int hp = 0;
-            int play = 1;
-
-            try
-            {
-                string line = input.ReadLine();               
-                int.TryParse(line, out xPos); //Convert lines into ints
-
-                line = input.ReadLine();                
-                int.TryParse(line, out yPos);
-
-                line = input.ReadLine();
-                int.TryParse(line, out hp);
-
-                line = input.ReadLine();
-                int.TryParse(line, out play);
-            }
-            catch (IOException ioe)
-            {
-                Console.WriteLine("Error reading file: " + ioe.Message);
-            }
-            finally
-            {
-                input.Close();
-            }
-            */
+        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -269,9 +261,12 @@ namespace Project_Kickass
 
                 case 1: // character select screen
                     spriteBatch.Draw(background, backgroundSize, Color.White);
-                    //spriteBatch.Draw(sel1, sel1Size, Color.White);
-                    //spriteBatch.Draw(frame, frame1Size, Color.White);
-                    //spriteBatch.Draw(frame, frame2Size, Color.White);
+                    spriteBatch.Draw(sel1, sel1Size, Color.White);
+                    spriteBatch.Draw(sel2, sel2Size, Color.White);
+                    spriteBatch.Draw(frame, frame1Size, Color.White);
+                    spriteBatch.Draw(frame, frame2Size, Color.White);
+                    spriteBatch.Draw(ignisTN, ignisTNRect, Color.White);
+                    spriteBatch.Draw(char05TN, char05TNRect, Color.White);
                     break;
 
                 case 2: // active gameState

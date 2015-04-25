@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 
 //Alex Heerding
+//Aidan Kaufman
+//Steven Ma
+//Alex Mallory
 namespace Project_Kickass
 {
     //creates a projectile
@@ -20,11 +23,18 @@ namespace Project_Kickass
         private int xPos; //x position
         private int yPos; //y position
         private bool isActive; //shows whether the projectile is active
+        private Texture2D projSkin;
+        private Rectangle projHitBox; // the projectile's hitbox
+
 
         //properties for attributes
         public int Player { get { return player; } }
         public int Damage { get { return damage; } }
-        public int XPos { get { return xPos; } }
+        public int XPos 
+        { 
+            get { return xPos; }
+            set { xPos = value; }
+        }
         public int YPos { get { return yPos; } }
 
         //constructor
@@ -86,8 +96,9 @@ namespace Project_Kickass
         }
 
         //Draw method
-        public void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spritebatch, int width, int height)
         {
+
             //draws in different spaces based on which tile in the grid the character occupies
             if (player == 1)
             {
@@ -95,22 +106,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(10, 90), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(110, 90), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(210, 90), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(310, 90), Color.White);
                     }
                 }
 
@@ -118,22 +129,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(10, 155), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(110, 155), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(210, 155), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(310, 155), Color.White);
                     }
                 }
 
@@ -141,22 +152,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(10, 220), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(110, 220), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(210, 220), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(310, 220), Color.White);
                     }
                 }
 
@@ -164,22 +175,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(10, 285), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(110, 285), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(210, 285), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2(310, 285), Color.White);
                     }
                 }
             }
@@ -190,22 +201,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 90), 285), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 190), 285), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 290), 285), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 390), 285), Color.White);
                     }
                 }
 
@@ -213,22 +224,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 90), 220), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 190), 220), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 290), 220), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 390), 220), Color.White);
                     }
                 }
 
@@ -236,22 +247,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 90), 155), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 190), 155), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 290), 155), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 390), 155), Color.White);
                     }
                 }
 
@@ -259,22 +270,22 @@ namespace Project_Kickass
                 {
                     if (xPos == 0)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 90), 90), Color.White);
                     }
 
                     if (xPos == 1)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 190), 90), Color.White);
                     }
 
                     if (xPos == 2)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 290), 90), Color.White);
                     }
 
                     if (xPos == 3)
                     {
-                        //spritebatch.Draw()
+                        spritebatch.Draw(projSkin, new Vector2((width - 390), 90), Color.White);
                     }
                 }
             }
