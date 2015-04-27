@@ -81,9 +81,6 @@
     <Content Include="Content\TitleScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\TitleScreenPlaceHolder.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
     <Content Include="SDL.dll" />
   </ItemGroup>

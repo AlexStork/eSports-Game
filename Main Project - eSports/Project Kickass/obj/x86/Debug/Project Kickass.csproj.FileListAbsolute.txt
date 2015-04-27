@@ -105,7 +105,6 @@ C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
-C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreenPlaceHolder.png
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
@@ -159,3 +158,4 @@ D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Tao.Sdl.dll
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Scaled Character 1 Standing Sprite.png
+C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Scaled Character 1 Standing Sprite.png
