@@ -35,16 +35,17 @@ namespace Project_Kickass
             get { return xPos; }
             set { xPos = value; }
         }
-        public int YPos { get { return yPos; } }
+        public int YPos { get { return yPos; } set { yPos = value; } }
 
         //constructor
-        public Projectile(int dmg, int play, int x, int y)
+        public Projectile(int dmg, int play, int x, int y, Texture2D skin)
         {
             damage = dmg;
             player = play;
             xPos = x;
             yPos = y;
             isActive = false;
+            projSkin = skin;
         }
 
         //fire method
@@ -54,20 +55,12 @@ namespace Project_Kickass
             if(player == 1)
             {
                 isActive = true;
-                while(xPos < 8)
-                {
-                    xPos++;
-                }
             }
 
             //player 2 right side of board
             if (player == 2)
             {
                 isActive = true;
-                while (xPos > 0)
-                {
-                    xPos--;
-                }
             }
         }
 
@@ -96,196 +89,117 @@ namespace Project_Kickass
         }
 
         //Draw method
-        public void Draw(SpriteBatch spritebatch, int width, int height)
+        public void Draw(SpriteBatch spritebatch)
         {
 
             //draws in different spaces based on which tile in the grid the character occupies
-            if (player == 1)
+            if(isActive == true)
             {
-                if (yPos == 0)
+                int xVal = 0;
+                int yVal = 0;
+                if(player == 1)
                 {
-                    if (xPos == 0)
+                    switch (xPos)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(10, 90), Color.White);
+                        case 0:
+                            xVal = 10;
+                            break;
+                        case 1:
+                            xVal = 110;
+                            break;
+                        case 2:
+                            xVal = 210;
+                            break;
+                        case 3:
+                            xVal = 310;
+                            break;
+                        case 4:
+                            xVal = 410;
+                            break;
+                        case 5:
+                            xVal = 510;
+                            break;
+                        case 6:
+                            xVal = 610;
+                            break;
+                        case 7:
+                            xVal = 710;
+                            break;
                     }
 
-                    if (xPos == 1)
+                    switch (yPos)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(110, 90), Color.White);
+                        case 0:
+                            yVal = 90;
+                            break;
+                        case 1:
+                            yVal = 155;
+                            break;
+                        case 2:
+                            yVal = 220;
+                            break;
+                        case 3:
+                            yVal = 285;
+                            break;
                     }
-
-                    if (xPos == 2)
+                
+                    if (xPos < 8)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(210, 90), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(310, 90), Color.White);
+                        spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
+                        xPos++;
                     }
                 }
 
-                if (yPos == 1)
+
+                if (player == 2)
                 {
-                    if (xPos == 0)
+                    switch (xPos)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(10, 155), Color.White);
+                        case 0:
+                            xVal = 710;
+                            break;
+                        case 1:
+                            xVal = 610;
+                            break;
+                        case 2:
+                            xVal = 510;
+                            break;
+                        case 3:
+                            xVal = 410;
+                            break;
+                        case 4:
+                            xVal = 310;
+                            break;
+                        case 5:
+                            xVal = 210;
+                            break;
+                        case 6:
+                            xVal = 110;
+                            break;
+                        case 7:
+                            xVal = 10;
+                            break;
                     }
 
-                    if (xPos == 1)
+                    switch (yPos)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(110, 155), Color.White);
+                        case 7:
+                            yVal = 90;
+                            break;
+                        case 6:
+                            yVal = 155;
+                            break;
+                        case 5:
+                            yVal = 220;
+                            break;
+                        case 4:
+                            yVal = 285;
+                            break;
                     }
-
-                    if (xPos == 2)
+                    if (xPos <8)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(210, 155), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(310, 155), Color.White);
-                    }
-                }
-
-                if (yPos == 2)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(10, 220), Color.White);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(110, 220), Color.White);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(210, 220), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(310, 220), Color.White);
-                    }
-                }
-
-                if (yPos == 3)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(10, 285), Color.White);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(110, 285), Color.White);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(210, 285), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2(310, 285), Color.White);
-                    }
-                }
-            }
-
-            if (player == 2)
-            {
-                if (yPos == 4)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 90), 285), Color.White);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 190), 285), Color.White);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 290), 285), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 390), 285), Color.White);
-                    }
-                }
-
-                if (yPos == 5)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 90), 220), Color.White);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 190), 220), Color.White);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 290), 220), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 390), 220), Color.White);
-                    }
-                }
-
-                if (yPos == 6)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 90), 155), Color.White);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 190), 155), Color.White);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 290), 155), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 390), 155), Color.White);
-                    }
-                }
-
-                if (yPos == 7)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 90), 90), Color.White);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 190), 90), Color.White);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 290), 90), Color.White);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(projSkin, new Vector2((width - 390), 90), Color.White);
+                        spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
+                        xPos++;
                     }
                 }
             }

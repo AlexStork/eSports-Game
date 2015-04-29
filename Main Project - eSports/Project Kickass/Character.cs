@@ -39,13 +39,13 @@ namespace Project_Kickass
         public int YPos { get { return yPos; } }
 
         //constructor
-        public Character(int x, int y, int hp, int play, Texture2D color)
+        public Character(int x, int y, int hp, int play, Texture2D color, Projectile proj)
         {
             xPos = x;//xposition which corresponds to the 2D array in gameboard
             yPos = y;//y position which corresponds to the 2d array in gameboard
             health = hp;//health points
             player = play; //owner of the character
-            bullet = new Projectile(10, play, x, y); //player's projectile
+            bullet = proj; //player's projectile
             skin = color; // sets skin for character
         }
 
@@ -140,6 +140,8 @@ namespace Project_Kickass
 
                 if (kstate.IsKeyDown(Keys.F))
                 {
+                    bullet.XPos = this.xPos;
+                    bullet.YPos = this.yPos;
                     bullet.Fire();
                 }
  
@@ -190,11 +192,6 @@ namespace Project_Kickass
                             keyPress = "j";
                         }
                     }
-
-                    if (kstate.IsKeyDown(Keys.H))
-                    {
-                        bullet.Fire();
-                    }
                 }
 
                 switch (keyPress)
@@ -234,6 +231,13 @@ namespace Project_Kickass
                             }
                             break;
                         }
+                }
+
+                if (kstate.IsKeyDown(Keys.H))
+                {
+                    bullet.XPos = this.xPos;
+                    bullet.YPos = this.yPos;
+                    bullet.Fire();
                 }
             }
         }

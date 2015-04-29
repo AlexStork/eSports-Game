@@ -71,6 +71,8 @@ namespace Project_Kickass
         GameBoard board;
         Character char1;
         Character char2;
+        Projectile char1Proj;
+        Projectile char2proj;
         int gameState = 0;
         bool canToggle;
 
@@ -120,8 +122,10 @@ namespace Project_Kickass
             character2 = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             characterPos = new Vector2(7, 75);
-            char1 = new Character(0, 0, 100, 1, character);
-            char2 = new Character(0, 7, 100, 2, character2);
+            char1Proj = new Projectile(10, 1, 0, 0,projectile);
+            char2proj = new Projectile(10, 2, 0, 7,projectile);
+            char1 = new Character(0, 0, 100, 1, character, char1Proj);
+            char2 = new Character(0, 7, 100, 2, character2,char2proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             ignisTNRect = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
@@ -252,6 +256,8 @@ namespace Project_Kickass
             //spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
             char1.Draw(spriteBatch,GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             char2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            char1Proj.Draw(spriteBatch);
+            char2proj.Draw(spriteBatch);
 
             switch (gameState)
             {
