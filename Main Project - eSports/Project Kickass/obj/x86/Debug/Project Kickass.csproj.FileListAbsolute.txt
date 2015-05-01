@@ -149,7 +149,6 @@ D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
-D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreenPlaceHolder.png
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Lidgren.Network.dll

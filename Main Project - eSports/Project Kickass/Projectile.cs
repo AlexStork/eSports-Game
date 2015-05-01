@@ -70,7 +70,7 @@ namespace Project_Kickass
         {
             if(isActive == true)
             {
-                if (this.XPos == cha.XPos && this.YPos == cha.YPos)
+                if (this.xPos == cha.XPos && this.yPos==cha.YPos)
                 {
                     isActive = false;
                     return true;
@@ -155,51 +155,52 @@ namespace Project_Kickass
                 {
                     switch (xPos)
                     {
-                        case 0:
+                        case 7:
                             xVal = 710;
                             break;
-                        case 1:
+                        case 6:
                             xVal = 610;
                             break;
-                        case 2:
+                        case 5:
                             xVal = 510;
                             break;
-                        case 3:
+                        case 4:
                             xVal = 410;
                             break;
-                        case 4:
+                        case 3:
                             xVal = 310;
                             break;
-                        case 5:
+                        case 2:
                             xVal = 210;
                             break;
-                        case 6:
+                        case 1:
                             xVal = 110;
                             break;
-                        case 7:
+                        case 0:
                             xVal = 10;
                             break;
                     }
 
                     switch (yPos)
                     {
-                        case 7:
+                        case 0:
                             yVal = 90;
                             break;
-                        case 6:
+                       case 1:
                             yVal = 155;
                             break;
-                        case 5:
+                        case 2:
                             yVal = 220;
                             break;
-                        case 4:
+                        case 3:
                             yVal = 285;
                             break;
                     }
-                    if (xPos <8)
+
+                    if (xPos > -1)
                     {
                         spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
-                        xPos++;
+                        xPos--;
                     }
                 }
             }

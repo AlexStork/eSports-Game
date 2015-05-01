@@ -125,7 +125,7 @@ namespace Project_Kickass
             char1Proj = new Projectile(10, 1, 0, 0,projectile);
             char2proj = new Projectile(10, 2, 0, 7,projectile);
             char1 = new Character(0, 0, 100, 1, character, char1Proj);
-            char2 = new Character(0, 7, 100, 2, character2,char2proj);
+            char2 = new Character(7, 0, 100, 2, character2,char2proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             ignisTNRect = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
@@ -200,6 +200,14 @@ namespace Project_Kickass
             {
                 char1.Input(kState);
                 char2.Input(kState);
+                if(char1Proj.isColliding(char2) == true)
+                {
+                    char1.takeDamage(char2proj.Damage);
+                }
+                if(char2proj.isColliding(char1) == true)
+                {
+                    char2.takeDamage(char1Proj.Damage);
+                }
             }
 
             if (gameState == 0)
