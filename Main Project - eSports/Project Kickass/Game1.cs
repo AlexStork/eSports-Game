@@ -75,6 +75,7 @@ namespace Project_Kickass
         Projectile char2proj;
         int gameState = 0;
         bool canToggle;
+        GameTime time;
 
         // keyboard state attribute
         KeyboardState kState;
@@ -122,8 +123,9 @@ namespace Project_Kickass
             character2 = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             characterPos = new Vector2(7, 75);
-            char1Proj = new Projectile(10, 1, 0, 0,projectile);
-            char2proj = new Projectile(10, 2, 0, 7,projectile);
+            time = new GameTime();
+            char1Proj = new Projectile(10, 1, 0, 0,projectile,time);
+            char2proj = new Projectile(10, 2, 0, 7,projectile,time);
             char1 = new Character(0, 0, 100, 1, character, char1Proj);
             char2 = new Character(7, 0, 100, 2, character2,char2proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");

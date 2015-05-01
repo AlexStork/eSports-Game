@@ -25,6 +25,7 @@ namespace Project_Kickass
         private bool isActive; //shows whether the projectile is active
         private Texture2D projSkin;
         private Rectangle projHitBox; // the projectile's hitbox
+        GameTime timer;
 
 
         //properties for attributes
@@ -38,7 +39,7 @@ namespace Project_Kickass
         public int YPos { get { return yPos; } set { yPos = value; } }
 
         //constructor
-        public Projectile(int dmg, int play, int x, int y, Texture2D skin)
+        public Projectile(int dmg, int play, int x, int y, Texture2D skin,GameTime ti)
         {
             damage = dmg;
             player = play;
@@ -46,6 +47,7 @@ namespace Project_Kickass
             yPos = y;
             isActive = false;
             projSkin = skin;
+            timer = ti;
         }
 
         //fire method
@@ -145,8 +147,11 @@ namespace Project_Kickass
                 
                     if (xPos < 8)
                     {
-                        spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
-                        xPos++;
+                        if (timer.ElapsedGameTime < 60)
+                        {
+                            spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
+                            xPos++;
+                        }
                     }
                 }
 
