@@ -67,10 +67,10 @@ namespace Project_Kickass
         Character char2;
         Projectile char1Proj;
         Projectile char2proj;
-        HealthBar hbP1;
-        HealthBar hbP2;
-        SelectScreen selector1;
-        SelectScreen selector2;
+        //HealthBar hbP1;
+        //HealthBar hbP2;
+        //SelectScreen selector1;
+        //SelectScreen selector2;
         int gameState = 0;
         bool canToggle;
         GameTime time;

@@ -104,28 +104,28 @@ namespace Project_Kickass
                     switch (xPos)
                     {
                         case 0:
-                            xVal = 10;
+                            xVal = 20;
                             break;
                         case 1:
-                            xVal = 110;
+                            xVal = 120;
                             break;
                         case 2:
-                            xVal = 210;
+                            xVal = 220;
                             break;
                         case 3:
-                            xVal = 310;
+                            xVal = 320;
                             break;
                         case 4:
-                            xVal = 410;
+                            xVal = 420;
                             break;
                         case 5:
-                            xVal = 510;
+                            xVal = 520;
                             break;
                         case 6:
-                            xVal = 610;
+                            xVal = 620;
                             break;
                         case 7:
-                            xVal = 710;
+                            xVal = 720;
                             break;
                     }
 
