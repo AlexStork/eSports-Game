@@ -20,8 +20,8 @@ namespace Project_Kickass
         //position of character on grid
         private int xPos;
         private int yPos;
-        private int health;
-        private int maxHealth;
+        private double health;
+        private double maxHealth;
         private int player; //tells which player controls character
         private Projectile bullet;
         private Texture2D skin;
@@ -37,6 +37,18 @@ namespace Project_Kickass
         }
         public int XPos { get { return xPos; } }
         public int YPos { get { return yPos; } }
+
+        public double Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
+        public int Player
+        {
+            get { return player; }
+            set { player = value; }
+        }
 
         //constructor
         public Character(int x, int y, int hp, int play, Texture2D color, Projectile proj)

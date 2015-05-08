@@ -147,7 +147,7 @@ namespace Project_Kickass
                 
                     if (xPos < 8)
                     {
-                        if (timer.ElapsedGameTime < 60)
+                        //if (timer.ElapsedGameTime < 60)
                         {
                             spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
                             xPos++;

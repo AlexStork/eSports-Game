@@ -58,13 +58,7 @@ namespace Project_Kickass
         Rectangle titleSize;
         Rectangle healthBarSize;
         Rectangle backgroundSize;
-        Rectangle frame1Size;
-        Rectangle frame2Size;
-        Rectangle sel1Size;
-        Rectangle sel2Size;
         Rectangle pauseSize;
-        Rectangle health1Size;
-        Rectangle health2Size;
         Rectangle ignisTNRect;
         Rectangle char05TNRect;
         Boolean isShot;
@@ -73,6 +67,10 @@ namespace Project_Kickass
         Character char2;
         Projectile char1Proj;
         Projectile char2proj;
+        HealthBar hbP1;
+        HealthBar hbP2;
+        SelectScreen selector1;
+        SelectScreen selector2;
         int gameState = 0;
         bool canToggle;
         GameTime time;
@@ -124,10 +122,10 @@ namespace Project_Kickass
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             characterPos = new Vector2(7, 75);
             time = new GameTime();
-            char1Proj = new Projectile(10, 1, 0, 0,projectile,time);
-            char2proj = new Projectile(10, 2, 0, 7,projectile,time);
+            char1Proj = new Projectile(10, 1, 0, 0, projectile, time);
+            char2proj = new Projectile(10, 2, 0, 7, projectile, time);
             char1 = new Character(0, 0, 100, 1, character, char1Proj);
-            char2 = new Character(7, 0, 100, 2, character2,char2proj);
+            char2 = new Character(7, 0, 100, 2, character2, char2proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             ignisTNRect = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
@@ -147,19 +145,17 @@ namespace Project_Kickass
             // health bar stuff
             healthBar = Content.Load<Texture2D>("HealthBar.png"); // loads the health bar
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
-            health = Content.Load<Texture2D>("Health.png"); // loads the player health 
-            health1Size = new Rectangle(0, 28, 600, 52); // creates a Rectangle object to set the size of player 1's health to
-            health2Size = new Rectangle(500, 28, 600, 52); // creates a Rectangle object to set the size of player 2's health to
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
+            health = Content.Load<Texture2D>("Health.png"); // loads the player health 
+            hbP1 = new HealthBar(char1, health); // creates the health bar object for player 1
+            hbP2 = new HealthBar(char2, health); // creates the health bar object for player 2
 
             // character select stuff
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
-            frame1Size = new Rectangle(100, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
-            frame2Size = new Rectangle(500, 100, GraphicsDevice.Viewport.Width / 5, GraphicsDevice.Viewport.Height / 5); // creates a Rectangle object to set the size of the character selector frame
             sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
-            sel1Size = new Rectangle(96, 73, 168, 126); // creates a Rectangle object to set the size of the character selector frame
-            sel2Size = new Rectangle(496, 73, 168, 126); // creates a Rectangle object to set the size of the character selector frame
+            selector1 = new SelectScreen(sel1, frame, 1); // creates the character selector object for player 1
+            selector2 = new SelectScreen(sel2, frame, 2); // creates the character selecter object for player 2
 
             //External Tool Values ----------------------------------------------
             //Read in Health
@@ -174,7 +170,7 @@ namespace Project_Kickass
             //-------------------------------------------------------------------
         }
 
-        
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -196,17 +192,17 @@ namespace Project_Kickass
                 Exit();
 
             // TODO: Add your update logic here
-            kState = Keyboard.GetState();           
+            kState = Keyboard.GetState();
 
             if (gameState == 2) // gameState has to be 'active' for commands to register
             {
                 char1.Input(kState);
                 char2.Input(kState);
-                if(char1Proj.isColliding(char2) == true)
+                if (char1Proj.isColliding(char2) == true)
                 {
                     char1.takeDamage(char2proj.Damage);
                 }
-                if(char2proj.isColliding(char1) == true)
+                if (char2proj.isColliding(char1) == true)
                 {
                     char2.takeDamage(char1Proj.Damage);
                 }
@@ -264,7 +260,7 @@ namespace Project_Kickass
             spriteBatch.Begin();
             board.Draw(spriteBatch);
             //spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-            char1.Draw(spriteBatch,GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            char1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             char2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             char1Proj.Draw(spriteBatch);
             char2proj.Draw(spriteBatch);
@@ -277,10 +273,8 @@ namespace Project_Kickass
 
                 case 1: // character select screen
                     spriteBatch.Draw(background, backgroundSize, Color.White);
-                    spriteBatch.Draw(sel1, sel1Size, Color.White);
-                    spriteBatch.Draw(sel2, sel2Size, Color.White);
-                    spriteBatch.Draw(frame, frame1Size, Color.White);
-                    spriteBatch.Draw(frame, frame2Size, Color.White);
+                    selector1.Draw(spriteBatch);
+                    selector2.Draw(spriteBatch);
                     spriteBatch.Draw(ignisTN, ignisTNRect, Color.White);
                     spriteBatch.Draw(char05TN, char05TNRect, Color.White);
                     break;
@@ -296,13 +290,14 @@ namespace Project_Kickass
                     }
 
 
-                    spriteBatch.Draw(health, health1Size, Color.White);
-                    spriteBatch.Draw(health, health2Size, Color.White);
+                    // draw healthbars
+                    hbP1.Draw(spriteBatch, char1);
+                    hbP2.Draw(spriteBatch, char2);
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     break;
 
                 case 3: // pause gameState
-                    
+
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     spriteBatch.Draw(pauseScreen, pauseSize, Color.White);
                     break;
