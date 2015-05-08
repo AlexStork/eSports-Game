@@ -147,15 +147,15 @@ namespace Project_Kickass
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
             health = Content.Load<Texture2D>("Health.png"); // loads the player health 
-            hbP1 = new HealthBar(char1, health); // creates the health bar object for player 1
-            hbP2 = new HealthBar(char2, health); // creates the health bar object for player 2
+            //hbP1 = new HealthBar(char1, health); // creates the health bar object for player 1
+            //hbP2 = new HealthBar(char2, health); // creates the health bar object for player 2
 
             // character select stuff
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
             sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
-            selector1 = new SelectScreen(sel1, frame, 1); // creates the character selector object for player 1
-            selector2 = new SelectScreen(sel2, frame, 2); // creates the character selecter object for player 2
+            //selector1 = new SelectScreen(sel1, frame, 1); // creates the character selector object for player 1
+            //selector2 = new SelectScreen(sel2, frame, 2); // creates the character selecter object for player 2
 
             //External Tool Values ----------------------------------------------
             //Read in Health
@@ -273,8 +273,8 @@ namespace Project_Kickass
 
                 case 1: // character select screen
                     spriteBatch.Draw(background, backgroundSize, Color.White);
-                    selector1.Draw(spriteBatch);
-                    selector2.Draw(spriteBatch);
+                    //selector1.Draw(spriteBatch);
+                    //selector2.Draw(spriteBatch);
                     spriteBatch.Draw(ignisTN, ignisTNRect, Color.White);
                     spriteBatch.Draw(char05TN, char05TNRect, Color.White);
                     break;
@@ -291,8 +291,8 @@ namespace Project_Kickass
 
 
                     // draw healthbars
-                    hbP1.Draw(spriteBatch, char1);
-                    hbP2.Draw(spriteBatch, char2);
+                    //hbP1.Draw(spriteBatch, char1);
+                    //hbP2.Draw(spriteBatch, char2);
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     break;
 

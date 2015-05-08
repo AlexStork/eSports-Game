@@ -104,44 +104,44 @@ namespace Project_Kickass
                     switch (xPos)
                     {
                         case 0:
-                            xVal = 20;
+                            xVal = 90;
                             break;
                         case 1:
-                            xVal = 120;
+                            xVal = 190;
                             break;
                         case 2:
-                            xVal = 220;
+                            xVal = 290;
                             break;
                         case 3:
-                            xVal = 320;
+                            xVal = 390;
                             break;
                         case 4:
-                            xVal = 420;
+                            xVal = 490;
                             break;
                         case 5:
-                            xVal = 520;
+                            xVal = 590;
                             break;
                         case 6:
-                            xVal = 620;
+                            xVal = 690;
                             break;
                         case 7:
-                            xVal = 720;
+                            xVal = 790;
                             break;
                     }
 
                     switch (yPos)
                     {
                         case 0:
-                            yVal = 90;
+                            yVal = 135;
                             break;
                         case 1:
-                            yVal = 155;
+                            yVal = 200;
                             break;
                         case 2:
-                            yVal = 220;
+                            yVal = 265;
                             break;
                         case 3:
-                            yVal = 285;
+                            yVal = 330;
                             break;
                     }
                 
@@ -161,25 +161,25 @@ namespace Project_Kickass
                     switch (xPos)
                     {
                         case 7:
-                            xVal = 710;
+                            xVal = 700;
                             break;
                         case 6:
-                            xVal = 610;
+                            xVal = 600;
                             break;
                         case 5:
-                            xVal = 510;
+                            xVal = 500;
                             break;
                         case 4:
-                            xVal = 410;
+                            xVal = 400;
                             break;
                         case 3:
-                            xVal = 310;
+                            xVal = 300;
                             break;
                         case 2:
-                            xVal = 210;
+                            xVal = 200;
                             break;
                         case 1:
-                            xVal = 110;
+                            xVal = 100;
                             break;
                         case 0:
                             xVal = 10;
@@ -189,16 +189,16 @@ namespace Project_Kickass
                     switch (yPos)
                     {
                         case 0:
-                            yVal = 90;
+                            yVal = 135;
                             break;
-                       case 1:
-                            yVal = 155;
+                        case 1:
+                            yVal = 200;
                             break;
                         case 2:
-                            yVal = 220;
+                            yVal = 265;
                             break;
                         case 3:
-                            yVal = 285;
+                            yVal = 330;
                             break;
                     }
 
