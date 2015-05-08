@@ -38,9 +38,11 @@
     <Compile Include="Character.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameBoard.cs" />
+    <Compile Include="HealthBar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectScreen.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
