@@ -158,3 +158,19 @@ D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Scaled Character 1 Standing Sprite.png
 C:\Users\Alex\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Scaled Character 1 Standing Sprite.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.pdb
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\HealthBar.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Panels HD.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\PauseScreenTemp.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Scaled Character 1 Standing Sprite.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\OpenTK.dll
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
