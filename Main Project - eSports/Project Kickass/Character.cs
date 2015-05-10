@@ -50,12 +50,19 @@ namespace Project_Kickass
             set { player = value; }
         }
 
+        public double MaxHealth
+        {
+            get { return maxHealth; }
+            set { maxHealth = value; }
+        }
+
         //constructor
         public Character(int x, int y, int hp, int play, Texture2D color, Projectile proj)
         {
             xPos = x;//xposition which corresponds to the 2D array in gameboard
             yPos = y;//y position which corresponds to the 2d array in gameboard
             health = hp;//health points
+            maxHealth = hp;//beginning health points
             player = play; //owner of the character
             bullet = proj; //player's projectile
             skin = color; // sets skin for character

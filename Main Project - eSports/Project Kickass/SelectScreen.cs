@@ -21,8 +21,13 @@ namespace Project_Kickass
         private Texture2D selectorSkin; // the border around the characters
         private Texture2D charPortrait1; // the first character's portrait (ie: Ignis)
         public int player;
+        private bool characterChosen; // true if the player has chosen their character
 
-
+        public bool CharacterChosen
+        {
+            get { return characterChosen; }
+            set { characterChosen = value; }
+        }
 
         // constructor (to be filled if necessary)
         public SelectScreen(Texture2D selSkin, Texture2D charPort1, int plyr)
@@ -32,8 +37,8 @@ namespace Project_Kickass
             player = plyr;
         }
 
-        // controlls
-        public void ChangeCharacter(Character ch, KeyboardState kState)
+        // select screen controls
+        public int CharacterSelect(Character ch, KeyboardState kState)
         {
             if (ch.Player == 1)
             {
@@ -46,7 +51,14 @@ namespace Project_Kickass
                 {
                     character++;
                 }
+
+                if (kState.IsKeyDown(Keys.W)) // player 1 selects with W
+                {
+                    characterChosen = true;
+                    return character;
+                }
             }
+
 
             if (ch.Player == 2)
             {
@@ -59,7 +71,15 @@ namespace Project_Kickass
                 {
                     character++;
                 }
+
+                if (kState.IsKeyDown(Keys.I)) // player 2 selects with I
+                {
+                    characterChosen = true;
+                    return character;
+                }
             }
+
+            return 0;
         }
 
         // the draw method, used to draw the character portrait, which should already be figured out before this method

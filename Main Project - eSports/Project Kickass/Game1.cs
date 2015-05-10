@@ -59,8 +59,8 @@ namespace Project_Kickass
         Rectangle healthBarSize;
         Rectangle backgroundSize;
         Rectangle pauseSize;
-        Rectangle ignisTNRect;
-        Rectangle char05TNRect;
+        Rectangle p2charSelectImage;
+        Rectangle p1charSelectImage;
         Boolean isShot;
         GameBoard board;
         Character char1;
@@ -127,9 +127,9 @@ namespace Project_Kickass
             char1 = new Character(0, 0, 100, 1, character, char1Proj);
             char2 = new Character(7, 0, 100, 2, character2, char2proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
-            ignisTNRect = new Rectangle(510, 108, 140, 80);
+            p2charSelectImage = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
-            char05TNRect = new Rectangle(110, 108, 140, 80);
+            p1charSelectImage = new Rectangle(110, 108, 140, 80);
 
             // screen stuff
             titleScreen = Content.Load<Texture2D>("TitleScreen.png"); // loads the title screen
@@ -223,6 +223,14 @@ namespace Project_Kickass
                 {
                     gameState = 2;
                 }
+
+                /* This will replace the current code when figured out
+                if (selector1.CharacterChosen == true && selector2.CharacterChosen == true)
+                {
+                    gameState = 2;
+                }
+                */
+
             }
 
             if (gameState == 2 && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if active and player presses tab, pause
@@ -275,8 +283,29 @@ namespace Project_Kickass
                     spriteBatch.Draw(background, backgroundSize, Color.White);
                     selector1.Draw(spriteBatch);
                     selector2.Draw(spriteBatch);
-                    spriteBatch.Draw(ignisTN, ignisTNRect, Color.White);
-                    spriteBatch.Draw(char05TN, char05TNRect, Color.White);
+                    spriteBatch.Draw(char05TN, p1charSelectImage, Color.White);
+                    spriteBatch.Draw(ignisTN, p2charSelectImage, Color.White);
+
+                    /* This will replace the current code when figured out
+                    if (selector1.CharacterSelect(char1, kState) == 1) // which character did p1 chose?
+                    {
+                        spriteBatch.Draw(char05TN, p1charSelectImage, Color.White);
+                    }
+                    else if (selector1.CharacterSelect(char1, kState) == 2)
+                    {
+                        spriteBatch.Draw(ignisTN, p1charSelectImage, Color.White);
+                    }
+
+                    if (selector2.CharacterSelect(char2, kState) == 1) // which character did p2 chose?
+                    {
+                        spriteBatch.Draw(char05TN, p2charSelectImage, Color.White);
+                    }
+                    else if (selector2.CharacterSelect(char2, kState) == 2)
+                    {
+                        spriteBatch.Draw(ignisTN, p2charSelectImage, Color.White);
+                    }
+                     * */
+                        
                     break;
 
                 case 2: // active gameState

@@ -31,11 +31,11 @@ namespace Project_Kickass
         {
             if (ch.Player == 1)
             {
-                spriteBatch.Draw(healthBarSkin, new Rectangle(460, 28, (int) ((ch.Health / 100) * 340), 52), Color.White);
+                spriteBatch.Draw(healthBarSkin, new Rectangle(460, 28, (int) ((ch.Health / ch.MaxHealth) * 340), 52), Color.White);
             }
             if (ch.Player == 2)
             {
-                spriteBatch.Draw(healthBarSkin, new Rectangle((int) ((1 - (ch.Health / 100)) * 340), 28, (int) ((ch.Health / 100)  * 345), 52), Color.White);
+                spriteBatch.Draw(healthBarSkin, new Rectangle((int) ((1 - (ch.Health / ch.MaxHealth)) * 340), 28, (int) ((ch.Health / 100)  * 345), 52), Color.White);
             }
         }
 
