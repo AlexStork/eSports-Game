@@ -43,8 +43,8 @@ namespace Project_Kickass
         Texture2D healthBar; // the health bar
         Texture2D health; // the health of each player
         Texture2D tile;
-        Texture2D character;
-        Texture2D character2;
+        Texture2D hanzoSprite;
+        Texture2D ignisSprite;
         Texture2D pauseScreen;
         Texture2D background;
         Texture2D frame;
@@ -66,7 +66,7 @@ namespace Project_Kickass
         Character char1;
         Character char2;
         Projectile char1Proj;
-        Projectile char2proj;
+        Projectile char2Proj;
         HealthBar hbP1;
         HealthBar hbP2;
         SelectScreen selector1;
@@ -117,15 +117,15 @@ namespace Project_Kickass
             board = new GameBoard(tile);
 
             // character stuff
-            character = Content.Load<Texture2D>("Standing Sprite.png");
-            character2 = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
+            hanzoSprite = Content.Load<Texture2D>("Standing Sprite.png");
+            ignisSprite = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             characterPos = new Vector2(7, 75);
             time = new GameTime();
             char1Proj = new Projectile(10, 1, 0, 0, projectile, time);
-            char2proj = new Projectile(10, 2, 0, 7, projectile, time);
-            char1 = new Character(0, 0, 100, 1, character, char1Proj);
-            char2 = new Character(7, 0, 100, 2, character2, char2proj);
+            char2Proj = new Projectile(10, 2, 0, 7, projectile, time);
+            char1 = new Character(0, 0, 100, 1, hanzoSprite, char1Proj);
+            char2 = new Character(7, 0, 100, 2, ignisSprite, char2Proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             p2charSelectImage = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
@@ -154,8 +154,8 @@ namespace Project_Kickass
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
             sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
-            selector1 = new SelectScreen(sel1, frame, 1); // creates the character selector object for player 1
-            selector2 = new SelectScreen(sel2, frame, 2); // creates the character selecter object for player 2
+            selector1 = new SelectScreen(ignisTN, char05TN, sel1, frame); // creates the character selector object for player 1
+            selector2 = new SelectScreen(ignisTN, char05TN, sel2, frame); // creates the character selecter object for player 2
 
             //External Tool Values ----------------------------------------------
             //Read in Health
@@ -196,13 +196,39 @@ namespace Project_Kickass
 
             if (gameState == 2) // gameState has to be 'active' for commands to register
             {
+                switch (selector1.P1Char) // p1
+                {
+                    case 0: // Hanzo image
+                        char1.Skin = ignisSprite;
+                        char1Proj.ProjSkin = projectile; // set later to ignis projectile
+                        break;
+
+                    case 1: // Ignis image
+                        char1.Skin = hanzoSprite;
+                        char1Proj.ProjSkin = projectile; // set later to hanzo projectile
+                        break;
+                }
+
+                switch (selector2.P2Char) // p2
+                {
+                    case 0: // Hanzo image
+                        char2.Skin = ignisSprite;
+                        char2Proj.ProjSkin = projectile; // set later to ignis projectile
+                        break;
+
+                    case 1: // Ignis image
+                        char2.Skin = hanzoSprite;
+                        char2Proj.ProjSkin = projectile; // set later to hanzo projectile
+                        break;
+                }
+
                 char1.Input(kState);
                 char2.Input(kState);
                 if (char1Proj.isColliding(char2) == true)
                 {
-                    char1.takeDamage(char2proj.Damage);
+                    char1.takeDamage(char2Proj.Damage);
                 }
-                if (char2proj.isColliding(char1) == true)
+                if (char2Proj.isColliding(char1) == true)
                 {
                     char2.takeDamage(char1Proj.Damage);
                 }
@@ -219,17 +245,20 @@ namespace Project_Kickass
 
             if (gameState == 1)
             {
+
+                // character select functionality
+                selector1.CharacterSelect(char1, kState);
+                selector2.CharacterSelect(char2, kState);
+
                 if (kState.IsKeyDown(Keys.Space)) // sets the gameState to active
                 {
                     gameState = 2;
                 }
 
-                /* This will replace the current code when figured out
-                if (selector1.CharacterChosen == true && selector2.CharacterChosen == true)
+                if (selector1.CharacterChosen == true && selector2.CharacterChosen == true) // sets the gameState to active
                 {
                     gameState = 2;
                 }
-                */
 
             }
 
@@ -271,7 +300,7 @@ namespace Project_Kickass
             char1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             char2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             char1Proj.Draw(spriteBatch);
-            char2proj.Draw(spriteBatch);
+            char2Proj.Draw(spriteBatch);
 
             switch (gameState)
             {
@@ -281,30 +310,8 @@ namespace Project_Kickass
 
                 case 1: // character select screen
                     spriteBatch.Draw(background, backgroundSize, Color.White);
-                    selector1.Draw(spriteBatch);
-                    selector2.Draw(spriteBatch);
-                    spriteBatch.Draw(char05TN, p1charSelectImage, Color.White);
-                    spriteBatch.Draw(ignisTN, p2charSelectImage, Color.White);
-
-                    /* This will replace the current code when figured out
-                    if (selector1.CharacterSelect(char1, kState) == 1) // which character did p1 chose?
-                    {
-                        spriteBatch.Draw(char05TN, p1charSelectImage, Color.White);
-                    }
-                    else if (selector1.CharacterSelect(char1, kState) == 2)
-                    {
-                        spriteBatch.Draw(ignisTN, p1charSelectImage, Color.White);
-                    }
-
-                    if (selector2.CharacterSelect(char2, kState) == 1) // which character did p2 chose?
-                    {
-                        spriteBatch.Draw(char05TN, p2charSelectImage, Color.White);
-                    }
-                    else if (selector2.CharacterSelect(char2, kState) == 2)
-                    {
-                        spriteBatch.Draw(ignisTN, p2charSelectImage, Color.White);
-                    }
-                     * */
+                    selector1.Draw(spriteBatch, char1);
+                    selector2.Draw(spriteBatch, char2);
                         
                     break;
 

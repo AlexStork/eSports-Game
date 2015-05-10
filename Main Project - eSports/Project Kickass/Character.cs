@@ -56,6 +56,18 @@ namespace Project_Kickass
             set { maxHealth = value; }
         }
 
+        public Texture2D Skin
+        {
+            get { return skin; }
+            set { skin = value; }
+        }
+
+        public Projectile Bullet
+        {
+            get { return bullet; }
+            set { bullet = value; }
+        }
+
         //constructor
         public Character(int x, int y, int hp, int play, Texture2D color, Projectile proj)
         {

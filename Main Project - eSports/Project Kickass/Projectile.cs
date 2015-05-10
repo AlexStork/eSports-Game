@@ -38,8 +38,14 @@ namespace Project_Kickass
         }
         public int YPos { get { return yPos; } set { yPos = value; } }
 
+        public Texture2D ProjSkin
+        {
+            get { return projSkin; }
+            set { projSkin = value; }
+        }
+
         //constructor
-        public Projectile(int dmg, int play, int x, int y, Texture2D skin,GameTime ti)
+        public Projectile(int dmg, int play, int x, int y, Texture2D skin, GameTime ti)
         {
             damage = dmg;
             player = play;
