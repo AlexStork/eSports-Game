@@ -24,9 +24,11 @@ namespace Project_Kickass
     /// ****Controls****
     /// Player 1:
     /// WASD Keys
+    /// F to Fire
     /// 
     /// Player 2:
     /// IJKL Keys
+    /// H to Fire
     /// 
     /// ****IMPORTANT********IMPORTANT****
     /// To progress to game from the main menu:
@@ -78,10 +80,16 @@ namespace Project_Kickass
         // keyboard state attribute
         KeyboardState kState;
 
-        //Ignis External Tool
-        StreamReader input = new StreamReader("ignis.txt");
-        int ignisHP = 0;
+        //External Tool
+        //Ignis
+        StreamReader ignisInput = new StreamReader("ignis.txt");
         int ignisProjDmg = 0;
+        int ignisFPB = 0;
+
+        //Hanzo
+        StreamReader hanzoInput = new StreamReader("hanzo.txt");
+        int hanzoProjDmg = 0;
+        int hanzoFPB = 0;
 
         public Game1()
             : base()
@@ -116,6 +124,31 @@ namespace Project_Kickass
             tile = Content.Load<Texture2D>("Panels HD.png");
             board = new GameBoard(tile);
 
+            //External Tool Values ----------------------------------------------
+
+            //Ignis
+            //Read in Projectile Damage
+            string inputLine = ignisInput.ReadLine();
+            int.TryParse(inputLine, out ignisProjDmg);
+
+            //Read in FPB
+            inputLine = ignisInput.ReadLine();
+            int.TryParse(inputLine, out ignisFPB);
+
+            ignisInput.Close();
+
+            //Hanzo
+            //Read in Projectile Damage
+            inputLine = hanzoInput.ReadLine();
+            int.TryParse(inputLine, out hanzoProjDmg);
+
+            //Read in FPB
+            inputLine = hanzoInput.ReadLine();
+            int.TryParse(inputLine, out hanzoFPB);
+
+            hanzoInput.Close();
+            //-------------------------------------------------------------------
+
             // character stuff
             hanzoSprite = Content.Load<Texture2D>("Standing Sprite.png");
             ignisSprite = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
@@ -125,7 +158,7 @@ namespace Project_Kickass
             char1Proj = new Projectile(10, 1, 0, 0, projectile, time);
             char2Proj = new Projectile(10, 2, 0, 7, projectile, time);
             char1 = new Character(0, 0, 100, 1, hanzoSprite, char1Proj);
-            char2 = new Character(7, 0, 100, 2, ignisSprite, char2Proj);
+            char2 = new Character(7, 3, 100, 2, ignisSprite, char2Proj);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             p2charSelectImage = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
@@ -156,18 +189,6 @@ namespace Project_Kickass
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
             selector1 = new SelectScreen(ignisTN, char05TN, sel1, frame); // creates the character selector object for player 1
             selector2 = new SelectScreen(ignisTN, char05TN, sel2, frame); // creates the character selecter object for player 2
-
-            //External Tool Values ----------------------------------------------
-            //Read in Health
-            string inputLine = input.ReadLine();
-            int.TryParse(inputLine, out ignisHP);
-
-            //Read in Projectile Damage
-            inputLine = input.ReadLine();
-            int.TryParse(inputLine, out ignisProjDmg);
-
-            input.Close();
-            //-------------------------------------------------------------------
         }
 
 
@@ -198,27 +219,47 @@ namespace Project_Kickass
             {
                 switch (selector1.P1Char) // p1
                 {
-                    case 0: // Hanzo image
+                    case 0: // Ignis
+                        //Image
                         char1.Skin = ignisSprite;
                         char1Proj.ProjSkin = projectile; // set later to ignis projectile
+
+                        //External Tool Values
+                        char1Proj.Damage = ignisProjDmg;
+                        char1Proj.FramesPerBlock = ignisFPB;
                         break;
 
-                    case 1: // Ignis image
+                    case 1: // Hanzo
+                        //Image
                         char1.Skin = hanzoSprite;
                         char1Proj.ProjSkin = projectile; // set later to hanzo projectile
+
+                        //External Tool Values
+                        char1Proj.Damage = hanzoProjDmg;
+                        char1Proj.FramesPerBlock = hanzoFPB;
                         break;
                 }
 
                 switch (selector2.P2Char) // p2
                 {
-                    case 0: // Hanzo image
+                    case 0: // Ignis 
+                        //Image
                         char2.Skin = ignisSprite;
                         char2Proj.ProjSkin = projectile; // set later to ignis projectile
+
+                        //External Tool Values
+                        char2Proj.Damage = ignisProjDmg;
+                        char2Proj.FramesPerBlock = ignisFPB;
                         break;
 
-                    case 1: // Ignis image
+                    case 1: // Hanzo 
+                        //Image
                         char2.Skin = hanzoSprite;
                         char2Proj.ProjSkin = projectile; // set later to hanzo projectile
+
+                        //External Tool Values
+                        char2Proj.Damage = hanzoProjDmg;
+                        char2Proj.FramesPerBlock = hanzoFPB;
                         break;
                 }
 
@@ -226,11 +267,13 @@ namespace Project_Kickass
                 char2.Input(kState);
                 if (char1Proj.isColliding(char2) == true)
                 {
-                    char1.takeDamage(char2Proj.Damage);
+                    Console.WriteLine(char1Proj.Damage + " " + char2.Health);
+                    char2.takeDamage(char1Proj.Damage);
                 }
                 if (char2Proj.isColliding(char1) == true)
                 {
-                    char2.takeDamage(char1Proj.Damage);
+                    Console.WriteLine(char2Proj.Damage + " " + char1.Health);
+                    char1.takeDamage(char2Proj.Damage);
                 }
             }
 
@@ -280,6 +323,15 @@ namespace Project_Kickass
                 {
                     canToggle = true;
                 }
+            }
+
+            if (gameState == 2 && char1.Health <= 0)
+            {
+                gameState = 3;
+            }
+            else if (gameState == 2 && char2.Health <= 0)
+            {
+                gameState = 0;
             }
 
             base.Update(gameTime);

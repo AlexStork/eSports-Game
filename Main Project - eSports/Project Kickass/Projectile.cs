@@ -26,11 +26,16 @@ namespace Project_Kickass
         private Texture2D projSkin;
         private Rectangle projHitBox; // the projectile's hitbox
         GameTime timer;
-
+        private int frame = 0;
+        private int framesPerBlock = 1;
 
         //properties for attributes
         public int Player { get { return player; } }
-        public int Damage { get { return damage; } }
+        public int Damage 
+        { 
+            get { return damage; }
+            set { damage = value; }
+        }
         public int XPos 
         { 
             get { return xPos; }
@@ -42,6 +47,12 @@ namespace Project_Kickass
         {
             get { return projSkin; }
             set { projSkin = value; }
+        }
+
+        public int FramesPerBlock
+        {
+            get { return framesPerBlock; }
+            set { framesPerBlock = value; }
         }
 
         //constructor
@@ -156,7 +167,13 @@ namespace Project_Kickass
                         //if (timer.ElapsedGameTime < 60)
                         {
                             spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
-                            xPos++;
+                            //Tracks FPB to delay movement
+                            frame++;
+                            if (frame >= framesPerBlock)
+                            {
+                                xPos++;
+                                frame = 0;
+                            }
                         }
                     }
                 }
