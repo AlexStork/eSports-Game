@@ -181,7 +181,6 @@ D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\PauseScreenTemp.png
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Projectile Sprite.png
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Scaled Character 1 Standing Sprite.png
-D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\TitleScreen.png
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.exe
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Project Kickass.pdb
@@ -190,3 +189,5 @@ D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\OpenTK.dll
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Tao.Sdl.dll
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 1 Standing Sprite.png
