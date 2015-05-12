@@ -69,11 +69,7 @@ namespace Project_Kickass
         //Character char1;
         //Character char2;
         Projectile char1Proj1;
-        Projectile char1Proj2;
-        Projectile char1Proj3;
         Projectile char2Proj1;
-        Projectile char2Proj2;
-        Projectile char2Proj3;
         HealthBar hbP1;
         HealthBar hbP2;
         SelectScreen selector1;

@@ -24,7 +24,6 @@ namespace Project_Kickass
         private int yPos; //y position
         private bool isActive; //shows whether the projectile is active
         private Texture2D projSkin;
-        private Rectangle projHitBox; // the projectile's hitbox
         GameTime timer;
         private int frame = 0;
         private int framesPerBlock = 1;

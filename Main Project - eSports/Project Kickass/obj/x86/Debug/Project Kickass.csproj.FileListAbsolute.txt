@@ -191,7 +191,6 @@ D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Standing Sprite.png
 D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 1 Standing Sprite.png
-<<<<<<< Updated upstream
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 1 Standing Sprite.png
 =======
 D:\Users\adm6649\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.exe
@@ -212,4 +211,4 @@ D:\Users\adm6649\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\adm6649\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Tao.Sdl.dll
 D:\Users\adm6649\Documents\eSports-Game\Main Project - eSports\Project Kickass\obj\x86\Debug\Project Kickass.csprojResolveAssemblyReference.cache
 D:\Users\adm6649\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Projectile Spritesheet.png
->>>>>>> Stashed changes
+D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Projectile Spritesheet.png
