@@ -11,15 +11,12 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Project_Kickass
 {
-
-    class Ignis:Character
+    class Hanzo:Character
     {
-        public Ignis(int x, int y, int hp, int play, Texture2D color, Projectile proj)
+        public Hanzo(int x, int y, int hp, int play, Texture2D color, Projectile proj)
             : base(x, y, hp, play, color, proj)
         {
-           
-        }
 
-        
+        }
     }
 }

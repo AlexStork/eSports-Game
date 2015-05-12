@@ -55,6 +55,11 @@ namespace Project_Kickass
             set { framesPerBlock = value; }
         }
 
+        public bool IsActive
+        {
+            get { return isActive; }
+        }
+
         //constructor
         public Projectile(int dmg, int play, int x, int y, Texture2D skin, GameTime ti)
         {

@@ -23,12 +23,13 @@ namespace Project_Kickass
         private double health;
         private double maxHealth;
         private int player; //tells which player controls character
-        private Projectile bullet;
+        private Projectile bullet1;
+
         private Texture2D skin;
         private bool canMove = true; // tells whether character can move
         private string keyPress = ""; // stores which key was pressed
         private Rectangle hitBox; // the player's hitbox
-
+        private bool dazed = false; //tells whether character is dazed
         //properties for attributes
         public Rectangle HitBox
         {
@@ -62,11 +63,11 @@ namespace Project_Kickass
             set { skin = value; }
         }
 
-        public Projectile Bullet
-        {
-            get { return bullet; }
-            set { bullet = value; }
-        }
+        //public Projectile Bullet
+        //{
+        //    get { return bullet; }
+        //    set { bullet = value; }
+        //}
 
         //constructor
         public Character(int x, int y, int hp, int play, Texture2D color, Projectile proj)
@@ -76,8 +77,13 @@ namespace Project_Kickass
             health = hp;//health points
             maxHealth = hp;//beginning health points
             player = play; //owner of the character
-            bullet = proj; //player's projectile
+            bullet1 = proj; //player's projectile
             skin = color; // sets skin for character
+        }
+
+        public Character()
+        {
+            // TODO: Complete member initialization
         }
 
         //move method and fire method
@@ -87,45 +93,48 @@ namespace Project_Kickass
             //player 1, left side of the board
             if (player == 1)
             {
-                if (canMove == true)
+                if (dazed == false)
                 {
-                    if (kstate.IsKeyDown(Keys.W))
+                    if (canMove == true)
                     {
-                        if (yPos > 0)
+                        if (kstate.IsKeyDown(Keys.W))
                         {
-                            yPos--;
-                            canMove = false;
-                            keyPress = "w";
+                            if (yPos > 0)
+                            {
+                                yPos--;
+                                canMove = false;
+                                keyPress = "w";
+                            }
                         }
-                    }
 
-                    if (kstate.IsKeyDown(Keys.A))
-                    {
-                        if (xPos > 0)
+                        if (kstate.IsKeyDown(Keys.A))
                         {
-                            xPos--;
-                            canMove = false;
-                            keyPress = "a";
+                            if (xPos > 0)
+                            {
+                                xPos--;
+                                canMove = false;
+                                keyPress = "a";
+                            }
                         }
-                    }
 
-                    if (kstate.IsKeyDown(Keys.S))
-                    {
-                        if (yPos < 3)
+                        if (kstate.IsKeyDown(Keys.S))
                         {
-                            yPos++;
-                            canMove = false;
-                            keyPress = "s";
+                            if (yPos < 3)
+                            {
+                                yPos++;
+                                canMove = false;
+                                keyPress = "s";
+                            }
                         }
-                    }
 
-                    if (kstate.IsKeyDown(Keys.D))
-                    {
-                        if (xPos < 3)
+                        if (kstate.IsKeyDown(Keys.D))
                         {
-                            xPos++;
-                            canMove = false;
-                            keyPress = "d";
+                            if (xPos < 3)
+                            {
+                                xPos++;
+                                canMove = false;
+                                keyPress = "d";
+                            }
                         }
                     }
                 }
@@ -168,12 +177,18 @@ namespace Project_Kickass
                             break;
                         }
                 }
-
-                if (kstate.IsKeyDown(Keys.F))
+                
+                if (dazed == false)
                 {
-                    bullet.XPos = this.xPos;
-                    bullet.YPos = this.yPos;
-                    bullet.Fire();
+                    if (kstate.IsKeyDown(Keys.NumPad1))
+                    {
+                        if (bullet1.XPos > 7 || bullet1.IsActive == false)
+                        {
+                            bullet1.XPos = this.xPos;
+                            bullet1.YPos = this.yPos;
+                            bullet1.Fire();
+                        }
+                    }
                 }
  
             }
@@ -182,49 +197,51 @@ namespace Project_Kickass
             //player 1, left side of the board
             if (player == 2)
             {
-                if (canMove == true)
+                if (dazed == false)
                 {
-                    if (kstate.IsKeyDown(Keys.I))
+                    if (canMove == true)
                     {
-                        if (yPos > 0)
+                        if (kstate.IsKeyDown(Keys.I))
                         {
-                            yPos--;
-                            canMove = false;
-                            keyPress = "i";
+                            if (yPos > 0)
+                            {
+                                yPos--;
+                                canMove = false;
+                                keyPress = "i";
+                            }
                         }
-                    }
 
-                    if (kstate.IsKeyDown(Keys.L))
-                    {
-                        if (xPos < 7)
+                        if (kstate.IsKeyDown(Keys.L))
                         {
-                            xPos++;
-                            canMove = false;
-                            keyPress = "l";
+                            if (xPos < 7)
+                            {
+                                xPos++;
+                                canMove = false;
+                                keyPress = "l";
+                            }
                         }
-                    }
 
-                    if (kstate.IsKeyDown(Keys.K))
-                    {
-                        if (yPos < 3)
+                        if (kstate.IsKeyDown(Keys.K))
                         {
-                            yPos++;
-                            canMove = false;
-                            keyPress = "k";
+                            if (yPos < 3)
+                            {
+                                yPos++;
+                                canMove = false;
+                                keyPress = "k";
+                            }
                         }
-                    }
 
-                    if (kstate.IsKeyDown(Keys.J))
-                    {
-                        if (xPos > 4)
+                        if (kstate.IsKeyDown(Keys.J))
                         {
-                            xPos--;
-                            canMove = false;
-                            keyPress = "j";
+                            if (xPos > 4)
+                            {
+                                xPos--;
+                                canMove = false;
+                                keyPress = "j";
+                            }
                         }
                     }
                 }
-
                 switch (keyPress)
                 {
                     case "i":
@@ -263,12 +280,18 @@ namespace Project_Kickass
                             break;
                         }
                 }
-
-                if (kstate.IsKeyDown(Keys.H))
+                
+                if (dazed == false)
                 {
-                    bullet.XPos = this.xPos;
-                    bullet.YPos = this.yPos;
-                    bullet.Fire();
+                    if (kstate.IsKeyDown(Keys.NumPad4))
+                    {
+                        if (bullet1.XPos < 0 || bullet1.IsActive == false)
+                        {
+                            bullet1.XPos = this.xPos;
+                            bullet1.YPos = this.yPos;
+                            bullet1.Fire();
+                        }
+                    }
                 }
             }
         }
@@ -277,6 +300,20 @@ namespace Project_Kickass
         public void takeDamage(int dmg)
         {
             health -= dmg;
+        }
+
+        // check to see if dazed
+        public bool IsDazed()
+        {
+            if(dazed == true)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
 
         //Draw method

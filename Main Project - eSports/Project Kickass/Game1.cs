@@ -65,10 +65,14 @@ namespace Project_Kickass
         Rectangle p1charSelectImage;
         Boolean isShot;
         GameBoard board;
-        Character char1;
-        Character char2;
-        Projectile char1Proj;
-        Projectile char2Proj;
+        //Character char1;
+        //Character char2;
+        Projectile char1Proj1;
+        Projectile char1Proj2;
+        Projectile char1Proj3;
+        Projectile char2Proj1;
+        Projectile char2Proj2;
+        Projectile char2Proj3;
         HealthBar hbP1;
         HealthBar hbP2;
         SelectScreen selector1;
@@ -76,6 +80,8 @@ namespace Project_Kickass
         int gameState = 0;
         bool canToggle;
         GameTime time;
+        Ignis ig1;
+        Ignis ig2;
 
         // keyboard state attribute
         KeyboardState kState;
@@ -155,10 +161,10 @@ namespace Project_Kickass
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             characterPos = new Vector2(7, 75);
             time = new GameTime();
-            char1Proj = new Projectile(10, 1, 0, 0, projectile, time);
-            char2Proj = new Projectile(10, 2, 0, 7, projectile, time);
-            char1 = new Character(0, 0, 100, 1, hanzoSprite, char1Proj);
-            char2 = new Character(7, 3, 100, 2, ignisSprite, char2Proj);
+            char1Proj1 = new Projectile(10, 1, 8, 0, projectile, time);
+            char2Proj1 = new Projectile(10, 2, -1, 7, projectile, time);
+            ig1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1);
+            ig2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             p2charSelectImage = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
@@ -180,8 +186,8 @@ namespace Project_Kickass
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
             health = Content.Load<Texture2D>("Health.png"); // loads the player health 
-            hbP1 = new HealthBar(char1, health); // creates the health bar object for player 1
-            hbP2 = new HealthBar(char2, health); // creates the health bar object for player 2
+            hbP1 = new HealthBar(ig1, health); // creates the health bar object for player 1 ignis
+            hbP2 = new HealthBar(ig2, health); // creates the health bar object for player 2 ignis
 
             // character select stuff
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
@@ -221,22 +227,22 @@ namespace Project_Kickass
                 {
                     case 0: // Ignis
                         //Image
-                        char1.Skin = ignisSprite;
-                        char1Proj.ProjSkin = projectile; // set later to ignis projectile
+                        //char1.Skin = ignisSprite;
+                        char1Proj1.ProjSkin = projectile; // set later to ignis projectile
 
                         //External Tool Values
-                        char1Proj.Damage = ignisProjDmg;
-                        char1Proj.FramesPerBlock = ignisFPB;
+                        char1Proj1.Damage = ignisProjDmg;
+                        char1Proj1.FramesPerBlock = ignisFPB;
                         break;
 
                     case 1: // Hanzo
                         //Image
-                        char1.Skin = hanzoSprite;
-                        char1Proj.ProjSkin = projectile; // set later to hanzo projectile
+                        //char1.Skin = hanzoSprite;
+                        char1Proj1.ProjSkin = projectile; // set later to hanzo projectile
 
                         //External Tool Values
-                        char1Proj.Damage = hanzoProjDmg;
-                        char1Proj.FramesPerBlock = hanzoFPB;
+                        char1Proj1.Damage = hanzoProjDmg;
+                        char1Proj1.FramesPerBlock = hanzoFPB;
                         break;
                 }
 
@@ -244,36 +250,37 @@ namespace Project_Kickass
                 {
                     case 0: // Ignis 
                         //Image
-                        char2.Skin = ignisSprite;
-                        char2Proj.ProjSkin = projectile; // set later to ignis projectile
-
+                        //char2.Skin = ignisSprite;
+                        char2Proj1.ProjSkin = projectile; // set later to ignis projectile
+                        
                         //External Tool Values
-                        char2Proj.Damage = ignisProjDmg;
-                        char2Proj.FramesPerBlock = ignisFPB;
+                        char2Proj1.Damage = ignisProjDmg;
+                        char2Proj1.FramesPerBlock = ignisFPB;;
                         break;
 
                     case 1: // Hanzo 
                         //Image
-                        char2.Skin = hanzoSprite;
-                        char2Proj.ProjSkin = projectile; // set later to hanzo projectile
+                        //char2.Skin = hanzoSprite;
+                        char2Proj1.ProjSkin = projectile; // set later to hanzo projectile
 
                         //External Tool Values
-                        char2Proj.Damage = hanzoProjDmg;
-                        char2Proj.FramesPerBlock = hanzoFPB;
+                        char2Proj1.Damage = hanzoProjDmg;
+                        char2Proj1.FramesPerBlock = hanzoFPB;
                         break;
                 }
 
-                char1.Input(kState);
-                char2.Input(kState);
-                if (char1Proj.isColliding(char2) == true)
+                ig1.Input(kState);
+                ig2.Input(kState);
+                if (char1Proj1.isColliding(ig2) == true)
                 {
-                    Console.WriteLine(char1Proj.Damage + " " + char2.Health);
-                    char2.takeDamage(char1Proj.Damage);
+                    Console.WriteLine(char1Proj1.Damage + " " + ig2.Health);
+                    ig2.takeDamage(char1Proj1.Damage);
                 }
-                if (char2Proj.isColliding(char1) == true)
+                
+                if (char2Proj1.isColliding(ig1) == true)
                 {
-                    Console.WriteLine(char2Proj.Damage + " " + char1.Health);
-                    char1.takeDamage(char2Proj.Damage);
+                    Console.WriteLine(char2Proj1.Damage + " " + ig1.Health);
+                    ig1.takeDamage(char2Proj1.Damage);
                 }
             }
 
@@ -290,8 +297,8 @@ namespace Project_Kickass
             {
 
                 // character select functionality
-                selector1.CharacterSelect(char1, kState);
-                selector2.CharacterSelect(char2, kState);
+                selector1.CharacterSelect(ig1, kState);
+                selector2.CharacterSelect(ig2, kState);
 
                 if (kState.IsKeyDown(Keys.Space)) // sets the gameState to active
                 {
@@ -325,11 +332,11 @@ namespace Project_Kickass
                 }
             }
 
-            if (gameState == 2 && char1.Health <= 0)
+            if (gameState == 2 && ig1.Health <= 0)
             {
                 gameState = 3;
             }
-            else if (gameState == 2 && char2.Health <= 0)
+            else if (gameState == 2 && ig2.Health <= 0)
             {
                 gameState = 0;
             }
@@ -349,10 +356,17 @@ namespace Project_Kickass
             spriteBatch.Begin();
             board.Draw(spriteBatch);
             //spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-            char1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            char2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            char1Proj.Draw(spriteBatch);
-            char2Proj.Draw(spriteBatch);
+            if (selector1.P1Char == 0)
+            {
+                ig1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            }
+
+            if (selector2.P2Char == 0)
+            {
+                ig2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            }
+            char1Proj1.Draw(spriteBatch);
+            char2Proj1.Draw(spriteBatch);
 
             switch (gameState)
             {
@@ -362,8 +376,8 @@ namespace Project_Kickass
 
                 case 1: // character select screen
                     spriteBatch.Draw(background, backgroundSize, Color.White);
-                    selector1.Draw(spriteBatch, char1);
-                    selector2.Draw(spriteBatch, char2);
+                    selector1.Draw(spriteBatch, ig1);
+                    selector2.Draw(spriteBatch, ig2);
                         
                     break;
 
@@ -379,8 +393,8 @@ namespace Project_Kickass
 
 
                     // draw healthbars
-                    hbP1.Draw(spriteBatch, char1);
-                    hbP2.Draw(spriteBatch, char2);
+                    hbP1.Draw(spriteBatch, ig1);
+                    hbP2.Draw(spriteBatch, ig2);
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     break;
 
