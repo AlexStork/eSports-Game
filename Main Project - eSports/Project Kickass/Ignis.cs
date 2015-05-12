@@ -30,8 +30,28 @@ namespace Project_Kickass
             fireBall = proj2;
         }
 
-        //Overwrite Input Method
-        public void Input(KeyboardState kstate)
+
+        public override void PassiveAbility()
+        {
+
+            //Passive: In Flame's Wake
+            if (flamesWake >= 4)
+            {
+                fireBall.XPos = this.XPos;
+                fireBall.YPos = this.YPos;
+                fireBall.FramesPerBlock = 60;
+                fireBall.Fire();
+
+                flamesWake = 0;
+            }
+            else
+            {
+                flamesWake++;
+            }
+        }
+
+        /*Overwrite Input Method
+        public override void Input(KeyboardState kstate)
         {
             //player 1, left side of the board
             if (this.Player == 1)
@@ -121,7 +141,7 @@ namespace Project_Kickass
                         }
                 }
 
-                if (this.Dazed == false)
+                if (!this.Dazed)
                 {
                     if (kstate.IsKeyDown(Keys.NumPad1))
                     {
@@ -260,6 +280,6 @@ namespace Project_Kickass
                     }
                 }
             }
-        }
+        }*/
     }
 }

@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.GamerServices;
 //Alex Mallory
 namespace Project_Kickass
 {
-    class Character
+    abstract class Character
     {
         //position of character on grid
         private int xPos;
@@ -112,6 +112,11 @@ namespace Project_Kickass
             // TODO: Complete member initialization
         }
 
+        public virtual void PassiveAbility()
+        {
+            // a method stub to be overridden by any character passives
+        }
+
         //move method and fire method
         //adjusts the xPos and yPos to determine which spot in array character occupies
         public void Input(KeyboardState kstate)
@@ -204,15 +209,16 @@ namespace Project_Kickass
                         }
                 }
                 
-                if (dazed == false)
+                if (!dazed)
                 {
                     if (kstate.IsKeyDown(Keys.NumPad1))
                     {
-                        if (bullet1.XPos > 7 || bullet1.IsActive == false)
+                        if (bullet1.XPos > 7 || !bullet1.IsActive)
                         {
                             bullet1.XPos = this.xPos;
                             bullet1.YPos = this.yPos;
                             bullet1.Fire();
+                            PassiveAbility();
                         }
                     }
                 }
@@ -223,9 +229,9 @@ namespace Project_Kickass
             //player 1, left side of the board
             if (player == 2)
             {
-                if (dazed == false)
+                if (!dazed)
                 {
-                    if (canMove == true)
+                    if (canMove)
                     {
                         if (kstate.IsKeyDown(Keys.I))
                         {
@@ -348,224 +354,15 @@ namespace Project_Kickass
             //draws in different spaces based on which tile in the grid the character occupies
             if(player == 1)
             {
-                if(yPos == 0)
-                {
-                    if(xPos == 0)
-                    {
-                        spritebatch.Draw(skin, new Vector2(10, 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(10, 90, skin.Width, skin.Height);
-                    }
-                    
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(skin, new Vector2(110, 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(110, 90, skin.Width, skin.Height);
-                    }
+                spritebatch.Draw(skin, new Vector2(10 + 100 * xPos, 90 + 65 * yPos), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
+                hitBox = new Rectangle(10 + 100 * xPos, 90, skin.Width, skin.Height);
 
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(skin, new Vector2(210, 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(210, 90, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(skin, new Vector2(310, 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(310, 90, skin.Width, skin.Height);
-                    }
-                }
-
-                if (yPos == 1)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(skin, new Vector2(10, 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(10, 155, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(skin, new Vector2(110, 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(110, 155, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(skin, new Vector2(210, 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(210, 155, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(skin, new Vector2(310, 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(310, 155, skin.Width, skin.Height);
-                    }
-                }
-
-                if (yPos == 2)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(skin, new Vector2(10, 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(10, 220, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(skin, new Vector2(110, 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(110, 220, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(skin, new Vector2(210, 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(210, 220, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(skin, new Vector2(310, 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(310, 220, skin.Width, skin.Height);
-                    }
-                }
-
-                if (yPos == 3)
-                {
-                    if (xPos == 0)
-                    {
-                        spritebatch.Draw(skin, new Vector2(10, 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(10, 285, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 1)
-                    {
-                        spritebatch.Draw(skin, new Vector2(110, 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(110, 285, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 2)
-                    {
-                        spritebatch.Draw(skin, new Vector2(210, 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(210, 285, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 3)
-                    {
-                        spritebatch.Draw(skin, new Vector2(310, 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-                        hitBox = new Rectangle(310, 285, skin.Width, skin.Height);
-                    }
-                }
             }
 
             if (player == 2)
             {
-                if (yPos == 3)
-                {
-                    if (xPos == 7)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 90), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 90), 285, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 6)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 190), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 190), 285, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 5)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 290), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 290), 285, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 4)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 390), 285), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 390), 285, skin.Width, skin.Height);
-                    }
-                }
-
-                if (yPos == 2)
-                {
-                    if (xPos == 7)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 90), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 90), 220, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 6)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 190), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 190), 220, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 5)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 290), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 290), 220, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 4)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 390), 220), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 390), 220, skin.Width, skin.Height);
-                    }
-                }
-
-                if (yPos == 1)
-                {
-                    if (xPos == 7)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 90), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 90), 155, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 6)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 190), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 190), 155, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 5)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 290), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 290), 155, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 4)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 390), 155), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 390), 155, skin.Width, skin.Height);
-                    }
-                }
-
-                if (yPos == 0)
-                {
-                    if (xPos == 7)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 90), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 90), 90, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 6)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 190), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 190), 90, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 5)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 290), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 290), 90, skin.Width, skin.Height);
-                    }
-
-                    if (xPos == 4)
-                    {
-                        spritebatch.Draw(skin, new Vector2((width - 390), 90), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
-                        hitBox = new Rectangle((width - 390), 90, skin.Width, skin.Height);
-                    }
-                }
+                spritebatch.Draw(skin, new Vector2(width - (90 + 100 * (7 - xPos)), 90 + (65 * (yPos))), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.FlipHorizontally, 0);
+                hitBox = new Rectangle(width - (90 + 100 * (7 - xPos)), 90 + (65 * (yPos)), skin.Width, skin.Height);
             }
         }
     }

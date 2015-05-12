@@ -214,3 +214,7 @@ D:\Users\adm6649\Documents\eSports-Game\Main Project - eSports\Project Kickass\b
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Projectile Spritesheet.png
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Thumbnail.png
 D:\Users\aah3099\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\IgnisThumbnail.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 1 Standing Sprite.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Projectile Spritesheet.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Thumbnail.png
+D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\IgnisThumbnail.png

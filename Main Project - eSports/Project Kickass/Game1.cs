@@ -40,6 +40,16 @@ namespace Project_Kickass
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // enumerators
+        private enum GameState
+        {   
+            MAIN_MENU,
+            SELECT_SCREEN,
+            IN_GAME,
+            PAUSE_SCREEN,
+            WIN_SCREEN
+        }
+
         // asset attributes
         Texture2D titleScreen; // the title screen
         Texture2D healthBar; // the health bar
@@ -76,13 +86,13 @@ namespace Project_Kickass
         HealthBar hbP2;
         SelectScreen selector1;
         SelectScreen selector2;
-        int gameState = 0;
+        GameState gameState = GameState.MAIN_MENU;
         bool canToggle;
         GameTime time;
-        Ignis ig1;
-        Ignis ig2;
-        Hanzo han1;
-        Hanzo han2;
+        Character char1;
+        Character char2;
+       // Hanzo han1;
+        //Hanzo han2;
 
         // keyboard state attribute
         KeyboardState kState;
@@ -169,10 +179,10 @@ namespace Project_Kickass
             char2Proj1 = new Projectile(10, 2, -1, 7, projectile, time);
             igFireBall1 = new Projectile(15, 1, 8, 0, projectile, time);
             igFireBall2 = new Projectile(15, 2, -1, 7, projectile, time);
-            ig1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1, igFireBall1);
-            ig2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1, igFireBall2);
-            han1 = new Hanzo(0, 0, 100, 1, hanzoSprite, char1Proj1);
-            han2 = new Hanzo(7, 3, 100, 2, hanzoSprite, char2Proj1);
+            //char1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1, igFireBall1);
+            //char2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1, igFireBall2);
+            //han1 = new Hanzo(0, 0, 100, 1, hanzoSprite, char1Proj1);
+            //han2 = new Hanzo(7, 3, 100, 2, hanzoSprite, char2Proj1);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             p2charSelectImage = new Rectangle(510, 108, 140, 80);
             char05TN = Content.Load<Texture2D>("Character 2 Thumbnail");
@@ -194,15 +204,15 @@ namespace Project_Kickass
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to
             healthBarSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, (GraphicsDevice.Viewport.Height)); // creates a Rectangle object to set the size of the title screen to the size of the screen
             health = Content.Load<Texture2D>("Health.png"); // loads the player health 
-            hbP1 = new HealthBar(ig1, health); // creates the health bar object for player 1 ignis
-            hbP2 = new HealthBar(ig2, health); // creates the health bar object for player 2 ignis
+            hbP1 = new HealthBar(char1, health); // creates the health bar object for player 1 ignis
+            hbP2 = new HealthBar(char2, health); // creates the health bar object for player 2 ignis
 
             // character select stuff
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
             sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
-            selector1 = new SelectScreen(ignisTN, char05TN, sel1, frame); // creates the character selector object for player 1
-            selector2 = new SelectScreen(ignisTN, char05TN, sel2, frame); // creates the character selecter object for player 2
+            selector1 = new SelectScreen(ignisTN, char05TN, sel1, frame, 1); // creates the character selector object for player 1
+            selector2 = new SelectScreen(ignisTN, char05TN, sel2, frame, 2); // creates the character selecter object for player 2
         }
 
 
@@ -229,11 +239,11 @@ namespace Project_Kickass
             // TODO: Add your update logic here
             kState = Keyboard.GetState();
 
-            if (gameState == 2) // gameState has to be 'active' for commands to register
+            if (gameState == GameState.IN_GAME) // gameState has to be 'active' for commands to register
             {
-                switch (selector1.P1Char) // p1
+                switch (selector1.PlayerChar) // p1
                 {
-                    case 0: // Ignis
+                    case CharacterType.IGNIS: // Ignis
                         //Image
                         //char1.Skin = ignisSprite;
                         char1Proj1.ProjSkin = projectile; // set later to ignis projectile
@@ -243,7 +253,7 @@ namespace Project_Kickass
                         char1Proj1.FramesPerBlock = ignisFPB;
                         break;
 
-                    case 1: // Hanzo
+                    case CharacterType.HANZO: // Hanzo
                         //Image
                         //char1.Skin = hanzoSprite;
                         char1Proj1.ProjSkin = projectile; // set later to hanzo projectile
@@ -254,9 +264,9 @@ namespace Project_Kickass
                         break;
                 }
 
-                switch (selector2.P2Char) // p2
+                switch (selector2.PlayerChar) // p2
                 {
-                    case 0: // Ignis 
+                    case CharacterType.IGNIS: // Ignis 
                         //Image
                         //char2.Skin = ignisSprite;
                         char2Proj1.ProjSkin = projectile; // set later to ignis projectile
@@ -266,7 +276,7 @@ namespace Project_Kickass
                         char2Proj1.FramesPerBlock = ignisFPB;;
                         break;
 
-                    case 1: // Hanzo 
+                    case CharacterType.HANZO: // Hanzo 
                         //Image
                         //char2.Skin = hanzoSprite;
                         char2Proj1.ProjSkin = projectile; // set later to hanzo projectile
@@ -277,14 +287,14 @@ namespace Project_Kickass
                         break;
                 }
 
-                ig1.Input(kState);
-                ig2.Input(kState);
-                han1.Input(kState);
-                han2.Input(kState);
-                if (char1Proj1.isColliding(ig2) == true)
+                char1.Input(kState);
+                char2.Input(kState);
+                //han1.Input(kState);
+                //han2.Input(kState);
+                if (char1Proj1.isColliding(char2) == true)
                 {
-                    Console.WriteLine(char1Proj1.Damage + " " + ig2.Health);
-                    ig2.takeDamage(char1Proj1.Damage);
+                    Console.WriteLine(char1Proj1.Damage + " " + char2.Health);
+                    char2.takeDamage(char1Proj1.Damage);
                 }
 
                 /*
@@ -295,54 +305,72 @@ namespace Project_Kickass
                 }
                 */
                 
-                if (char2Proj1.isColliding(ig1) == true)
+                if (char2Proj1.isColliding(char1) == true)
                 {
-                    Console.WriteLine(char2Proj1.Damage + " " + ig1.Health);
-                    ig1.takeDamage(char2Proj1.Damage);
+                    Console.WriteLine(char2Proj1.Damage + " " + char1.Health);
+                    char1.takeDamage(char2Proj1.Damage);
                 }
             }
 
-            if (gameState == 0)
+            if (gameState == GameState.MAIN_MENU)
             {
                 if (kState.IsKeyDown(Keys.Enter)) // sets the gameState to character select
                 {
-                    gameState = 1;
+                    gameState = GameState.SELECT_SCREEN;
 
                 }
             }
 
-            if (gameState == 1)
+            if (gameState == GameState.SELECT_SCREEN)
             {
 
                 // character select functionality
-                selector1.CharacterSelect(ig1, kState);
-                selector2.CharacterSelect(ig2, kState);
-
-                if (kState.IsKeyDown(Keys.Space)) // sets the gameState to active
-                {
-                    gameState = 2;
-                }
+                selector1.CharacterSelect(kState);
+                selector2.CharacterSelect(kState);
 
                 if (selector1.CharacterChosen == true && selector2.CharacterChosen == true) // sets the gameState to active
                 {
-                    gameState = 2;
+                    gameState = GameState.IN_GAME;
+                    
+                    // Player 1 character load
+                    if (selector1.PlayerChar == CharacterType.IGNIS)
+                    {
+                        char1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1, igFireBall1);
+                    }
+
+                    if (selector1.PlayerChar == CharacterType.HANZO)
+                    {
+                        char1 = new Hanzo(0, 0, 100, 1, hanzoSprite, char1Proj1);
+                    }
+
+                    // Player 2 character load
+                    if (selector2.PlayerChar == CharacterType.IGNIS)
+                    {
+                        char2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1, igFireBall2);
+                    }
+
+                    if (selector2.PlayerChar == CharacterType.HANZO)
+                    {
+                        char2 = new Hanzo(7, 3, 100, 2, hanzoSprite, char2Proj1);
+                    }
+
                 }
 
             }
 
-            if (gameState == 2 && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if active and player presses tab, pause
+            if (gameState == GameState.IN_GAME && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if active and player presses tab, pause
             {
                 canToggle = false;
-                gameState = 3;
+                gameState = GameState.PAUSE_SCREEN;
             }
 
-            if (gameState == 3 && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if paused and player presses tab, unpause
+            if (gameState == GameState.PAUSE_SCREEN && kState.IsKeyDown(Keys.Tab) && canToggle == true) // if paused and player presses tab, unpause
             {
                 canToggle = false;
-                gameState = 2;
+                gameState = GameState.IN_GAME;
             }
 
-            if (gameState == 2 || gameState == 3)
+            if (gameState == GameState.IN_GAME || gameState == GameState.PAUSE_SCREEN)
             {
                 if (kState.IsKeyUp(Keys.Tab))
                 {
@@ -350,11 +378,11 @@ namespace Project_Kickass
                 }
             }
 
-            if (gameState == 2 && ig1.Health <= 0)
+            if (gameState == GameState.IN_GAME && char1.Health <= 0)
             {
-                gameState = 3;
+                gameState = GameState.PAUSE_SCREEN;
             }
-            else if (gameState == 2 && ig2.Health <= 0)
+            else if (gameState == GameState.IN_GAME && char2.Health <= 0)
             {
                 gameState = 0;
             }
@@ -368,49 +396,34 @@ namespace Project_Kickass
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.HotPink);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
             board.Draw(spriteBatch);
-            //spriteBatch.Draw(character, characterPos, null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 0);
-            if (selector1.P1Char == 0)
-            {
-                ig1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            }
-
-            if(selector1.P1Char == 1)
-            {
-                han1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            }
-
-            if (selector2.P2Char == 0)
-            {
-                ig2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            }
-
-            if (selector2.P2Char == 1)
-            {
-                han2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            }
-
             char1Proj1.Draw(spriteBatch);
             char2Proj1.Draw(spriteBatch);
 
             switch (gameState)
             {
-                case 0: // title screen gameState
+                case GameState.MAIN_MENU: // title screen gameState
                     spriteBatch.Draw(titleScreen, titleSize, Color.White);
                     break;
 
-                case 1: // character select screen
+                case GameState.SELECT_SCREEN: // character select screen
                     spriteBatch.Draw(background, backgroundSize, Color.White);
-                    selector1.Draw(spriteBatch, ig1);
-                    selector2.Draw(spriteBatch, ig2);
+                    selector1.Draw(spriteBatch);
+                    selector2.Draw(spriteBatch);
                         
                     break;
 
-                case 2: // active gameState
+                case GameState.IN_GAME: // active gameState
+
+                    char1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                    char2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
+
                     if (isShot == true)
                     {
                         for (int i = 1; i < 800; i++)
@@ -422,12 +435,12 @@ namespace Project_Kickass
 
 
                     // draw healthbars
-                    hbP1.Draw(spriteBatch, ig1);
-                    hbP2.Draw(spriteBatch, ig2);
+                    hbP1.Draw(spriteBatch, char1);
+                    hbP2.Draw(spriteBatch, char2);
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     break;
 
-                case 3: // pause gameState
+                case GameState.PAUSE_SCREEN: // pause gameState
 
                     spriteBatch.Draw(healthBar, healthBarSize, Color.White);
                     spriteBatch.Draw(pauseScreen, pauseSize, Color.White);

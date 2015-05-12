@@ -13,19 +13,23 @@ using System.IO;
 
 namespace Project_Kickass
 {
-    class SelectScreen
+    // enumerators
+    public enum CharacterType
     {
-
+        IGNIS,
+        HANZO
+    }
+    class SelectScreen
+    {        
         // attributes
-        private int p1char; // p1 int that represents the currently selected character
-        private int p2char; // p2 int that represents the currently selected character
+        private CharacterType playerChar; // p1 int that represents the currently selected character
         private Texture2D IgnisSkin; // the first character's portrait (Ignis)
         private Texture2D HanzoSkin; // the second character's portrait (Hanzo)
         private Texture2D selectorSkin; // selector skin of the player
         private Texture2D charPortrait; // the border around the characters
         private bool characterChosen; // true if the player has chosen their character
-        private bool p1Released = true; // has the player released the key?
-        private bool p2Released = true; // has the player released the key?
+        private bool released = true; // has the player released the key?
+        private int player;
 
         public bool CharacterChosen
         {
@@ -33,60 +37,57 @@ namespace Project_Kickass
             set { characterChosen = value; }
         }
 
-        public int P1Char
+        public CharacterType PlayerChar
         {
-            get { return p1char; }
-            set { p1char = value; }
-        }
-
-        public int P2Char
-        {
-            get { return p2char; }
-            set { p2char = value; }
+            get { return playerChar; }
+            set { playerChar = value; }
         }
 
         // constructor
-        public SelectScreen(Texture2D chSkin1, Texture2D chSkin2, Texture2D selSkin, Texture2D charPort)
+        public SelectScreen(Texture2D chSkin1, Texture2D chSkin2, Texture2D selSkin, Texture2D charPort, int player)
         {
             IgnisSkin = chSkin1;
             HanzoSkin = chSkin2;
             selectorSkin = selSkin;
             charPortrait = charPort;
-            p1char = 0;
-            p2char = 1;
+            this.player = player;
+            if (player == 1)
+            {
+                playerChar = CharacterType.IGNIS;
+            }
+            else if (player == 2)
+            {
+                playerChar = CharacterType.HANZO;
+            }
         }
 
         // select screen controls
-        public void CharacterSelect(Character ch, KeyboardState kState)
+        public void CharacterSelect(KeyboardState kState)
         {
-            if (kState.IsKeyDown(Keys.D))
-            {
-                Console.WriteLine("MUTHA FUKKA IM WORKING!");
-            }
-            if (kState.IsKeyUp(Keys.A) && kState.IsKeyUp(Keys.D)) p1Released = true; // prevents the characters from switching every frame the keys are held down (p1)
-            if (kState.IsKeyUp(Keys.L) && kState.IsKeyUp(Keys.J)) p2Released = true; // prevents the characters from switching every frame the keys are held down (p2)
+            if (player == 1 && kState.IsKeyUp(Keys.A) && kState.IsKeyUp(Keys.D)) released = true; // prevents the characters from switching every frame the keys are held down (p1)
+            if (player == 2 && kState.IsKeyUp(Keys.L) && kState.IsKeyUp(Keys.J)) released = true; // prevents the characters from switching every frame the keys are held down (p2)
 
-            if (ch.Player == 1)
+            if (player == 1)
             {
-                if (p1Released == true)
+                if (released == true)
                 {
-                    if(p1char == 0)
+                    if(playerChar == CharacterType.IGNIS)
                     {
                         if (kState.IsKeyDown(Keys.D))
                         {
-                            p1char = 1;
+                            playerChar = CharacterType.HANZO;
                             Console.WriteLine("D pressed");
-                            p1Released = false;
+                            released = false;
                         }
                     }
                             
-                    if(p2char == 1)
+                    if(playerChar == CharacterType.HANZO)
                     {
                         if (kState.IsKeyDown(Keys.A))
                         {
-                            p1char = 0;
+                            playerChar = CharacterType.IGNIS;
                             Console.WriteLine("A pressed");
-                            p1Released = false;
+                            released = false;
                         }
                     }
                             
@@ -98,27 +99,27 @@ namespace Project_Kickass
             }
 
 
-            if (ch.Player == 2)
+            if (player == 2)
             {
-                if (p2Released == true)
+                if (released == true)
                 {
-                    if (p2char == 0)
+                    if (playerChar == CharacterType.IGNIS)
                     {
                         if (kState.IsKeyDown(Keys.L))
                         {
-                            p2char = 1;
+                            playerChar = CharacterType.HANZO;
                             Console.WriteLine("L pressed");
-                            p2Released = false;
+                            released = false;
                         }
                     }
 
-                    if (p2char == 1)
+                    if (playerChar == CharacterType.HANZO)
                     {
                         if (kState.IsKeyDown(Keys.J))
                         {
-                            p2char = 0;
+                            playerChar = CharacterType.IGNIS;
                             Console.WriteLine("J pressed");
-                            p2Released = false;
+                            released = false;
                         }
                     }
                             
@@ -132,33 +133,33 @@ namespace Project_Kickass
         }
 
         // the draw method, used to draw the character portrait, which should already be figured out before this method
-        public void Draw(SpriteBatch spriteBatch, Character ch)
+        public void Draw(SpriteBatch spriteBatch)
         {
 
-            if (ch.Player == 1)
+            if (player == 1)
             {
                 spriteBatch.Draw(selectorSkin, new Rectangle(96, 73, 168, 126), Color.White); // p1 selector skin
                 spriteBatch.Draw(charPortrait, new Rectangle(100, 100, spriteBatch.GraphicsDevice.Viewport.Width / 5, spriteBatch.GraphicsDevice.Viewport.Height / 5), Color.White); // p1 frame
-                if (p1char == 0)
+                if (playerChar == CharacterType.IGNIS)
                 {
                     spriteBatch.Draw(IgnisSkin, new Rectangle(110, 108, 140, 80),null, Color.White, 0, new Vector2(0,0), SpriteEffects.FlipHorizontally,0); // draws Ignis in p1's spot
                 }
-                else if (p1char == 1)
+                else if (playerChar == CharacterType.HANZO)
                 {
                     spriteBatch.Draw(HanzoSkin, new Rectangle(110, 108, 140, 80), Color.White); // draws Hanzo in p1's spot
                 }
             }
 
-            if (ch.Player == 2)
+            if (player == 2)
             {
                 spriteBatch.Draw(selectorSkin, new Rectangle(496, 73, 168, 126), Color.White); // p2 selector skin
                 spriteBatch.Draw(charPortrait, new Rectangle(500, 100, spriteBatch.GraphicsDevice.Viewport.Width / 5, spriteBatch.GraphicsDevice.Viewport.Height / 5), Color.White); // p2 frame
 
-                if (p2char == 0)
+                if (playerChar == CharacterType.IGNIS)
                 {
                     spriteBatch.Draw(IgnisSkin, new Rectangle(510, 108, 140, 80), Color.White); // draws Ignis in p2's spot
                 }
-                else if (p2char == 1)
+                else if (playerChar == CharacterType.HANZO)
                 {
                     spriteBatch.Draw(HanzoSkin, new Rectangle(510, 108, 140, 80), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0); // draws Hanzo in p2's spot
                 }

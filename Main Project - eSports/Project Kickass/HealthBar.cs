@@ -15,9 +15,14 @@ namespace Project_Kickass
     class HealthBar
     {
 
+        // constants
+        const int HEALTHBAR_HEIGHT = 52;
+        const int HEALTHBAR_Y = 28;
+        const int HEALTHBAR_WIDTH = 340;
+        const int HEALTHBAR2_X = 460;
+
         // attributes
         private Texture2D healthBarSkin;
-
 
 
         // constructor
@@ -29,13 +34,13 @@ namespace Project_Kickass
         // draw method
         public void Draw(SpriteBatch spriteBatch, Character ch)
         {
-            if (ch.Player == 2)
-            {
-                spriteBatch.Draw(healthBarSkin, new Rectangle(460, 28, (int)((ch.Health / ch.MaxHealth) * 340), 52), Color.White);
-            }
             if (ch.Player == 1)
             {
-                spriteBatch.Draw(healthBarSkin, new Rectangle((int) ((1 - (ch.Health / ch.MaxHealth)) * 340), 28, (int) ((ch.Health / 100)  * 345), 52), Color.White);
+                spriteBatch.Draw(healthBarSkin, new Rectangle((int)((1 - (ch.Health / ch.MaxHealth)) * HEALTHBAR_WIDTH), HEALTHBAR_Y, (int)((ch.Health / ch.MaxHealth) * HEALTHBAR_WIDTH + 5/* buffer*/), HEALTHBAR_HEIGHT), Color.White);
+            }
+            if (ch.Player == 2)
+            {
+                spriteBatch.Draw(healthBarSkin, new Rectangle(HEALTHBAR2_X, HEALTHBAR_Y, (int)((ch.Health / ch.MaxHealth) * HEALTHBAR_WIDTH), HEALTHBAR_HEIGHT), Color.White);
             }
         }
 
