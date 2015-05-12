@@ -59,6 +59,7 @@ namespace Project_Kickass
         public bool IsActive
         {
             get { return isActive; }
+            set { isActive = value; }
         }
 
         //constructor
@@ -72,7 +73,7 @@ namespace Project_Kickass
             projSkin = skin;
             timer = ti;
 
-            hanzoProjectile = new Sprite(skin, new Point(365, 365), new Vector2(XPos, yPos), 2, 30);
+            //hanzoProjectile = new Sprite(skin, new Point(365, 365), new Vector2(XPos, yPos), 2, 30);
         }
 
         //fire method
@@ -236,7 +237,13 @@ namespace Project_Kickass
                     if (xPos > -1)
                     {
                         spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
-                        xPos--;
+                        //Tracks FPB to delay movement
+                        frame++;
+                        if (frame >= framesPerBlock)
+                        {
+                            xPos--;
+                            frame = 0;
+                        }
                     }
                 }
             }

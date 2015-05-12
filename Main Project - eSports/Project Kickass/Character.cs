@@ -36,8 +36,16 @@ namespace Project_Kickass
             get { return hitBox; }
             set { hitBox = value; }
         }
-        public int XPos { get { return xPos; } }
-        public int YPos { get { return yPos; } }
+        public int XPos 
+        { 
+            get { return xPos; }
+            set { xPos = value; }
+        }
+        public int YPos 
+        { 
+            get { return yPos; }
+            set { yPos = value; }
+        }
 
         public double Health
         {
@@ -63,11 +71,29 @@ namespace Project_Kickass
             set { skin = value; }
         }
 
-        //public Projectile Bullet
-        //{
-        //    get { return bullet; }
-        //    set { bullet = value; }
-        //}
+        public bool Dazed
+        {
+            get { return dazed; }
+            set { dazed = value; }
+        }
+
+        public bool CanMove
+        {
+            get { return canMove; }
+            set { canMove = value; }
+        }
+
+        public string KeyPress
+        {
+            get { return keyPress; }
+            set { keyPress = value; }
+        }
+
+        public Projectile Bullet1
+        {
+            get { return bullet1; }
+            set { bullet1 = value; }
+        }
 
         //constructor
         public Character(int x, int y, int hp, int play, Texture2D color, Projectile proj)

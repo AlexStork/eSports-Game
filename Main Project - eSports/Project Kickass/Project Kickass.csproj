@@ -71,6 +71,12 @@
     <Content Include="Content\Character 2 Projectile Spritesheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Character 2 Thumbnail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\IgnisThumbnail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Standing Sprite.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

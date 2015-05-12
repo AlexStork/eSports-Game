@@ -141,7 +141,7 @@ namespace Project_Kickass
                 spriteBatch.Draw(charPortrait, new Rectangle(100, 100, spriteBatch.GraphicsDevice.Viewport.Width / 5, spriteBatch.GraphicsDevice.Viewport.Height / 5), Color.White); // p1 frame
                 if (p1char == 0)
                 {
-                    spriteBatch.Draw(IgnisSkin, new Rectangle(110, 108, 140, 80), Color.White); // draws Ignis in p1's spot
+                    spriteBatch.Draw(IgnisSkin, new Rectangle(110, 108, 140, 80),null, Color.White, 0, new Vector2(0,0), SpriteEffects.FlipHorizontally,0); // draws Ignis in p1's spot
                 }
                 else if (p1char == 1)
                 {
@@ -160,7 +160,7 @@ namespace Project_Kickass
                 }
                 else if (p2char == 1)
                 {
-                    spriteBatch.Draw(HanzoSkin, new Rectangle(510, 108, 140, 80), Color.White); // draws Hanzo in p2's spot
+                    spriteBatch.Draw(HanzoSkin, new Rectangle(510, 108, 140, 80), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0); // draws Hanzo in p2's spot
                 }
             }
 

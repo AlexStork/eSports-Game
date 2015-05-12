@@ -24,11 +24,11 @@ namespace Project_Kickass
     /// ****Controls****
     /// Player 1:
     /// WASD Keys
-    /// F to Fire
+    /// numpad 1 to Fire
     /// 
     /// Player 2:
     /// IJKL Keys
-    /// H to Fire
+    /// numpad 2 to Fire
     /// 
     /// ****IMPORTANT********IMPORTANT****
     /// To progress to game from the main menu:
@@ -70,6 +70,8 @@ namespace Project_Kickass
         //Character char2;
         Projectile char1Proj1;
         Projectile char2Proj1;
+        Projectile igFireBall1; //Ability Passive
+        Projectile igFireBall2; //Ability Passive
         HealthBar hbP1;
         HealthBar hbP2;
         SelectScreen selector1;
@@ -79,6 +81,8 @@ namespace Project_Kickass
         GameTime time;
         Ignis ig1;
         Ignis ig2;
+        Hanzo han1;
+        Hanzo han2;
 
         // keyboard state attribute
         KeyboardState kState;
@@ -142,7 +146,7 @@ namespace Project_Kickass
 
             //Hanzo
             //Load projectile asset
-            hanzoProj = Content.Load<Texture2D>("Character 2 Projectile Spritesheet.png");
+            hanzoProj = Content.Load<Texture2D>("Projectile Sprite.png");
 
             //Read in Projectile Damage
             inputLine = hanzoInput.ReadLine();
@@ -158,16 +162,20 @@ namespace Project_Kickass
             // character stuff
             hanzoSprite = Content.Load<Texture2D>("Standing Sprite.png");
             ignisSprite = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
-            projectile = Content.Load<Texture2D>("Character 2 Projectile Spritesheet.png");
+            projectile = Content.Load<Texture2D>("Projectile Sprite.png");
             characterPos = new Vector2(7, 75);
             time = new GameTime();
             char1Proj1 = new Projectile(10, 1, 8, 0, projectile, time);
             char2Proj1 = new Projectile(10, 2, -1, 7, projectile, time);
-            ig1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1);
-            ig2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1);
+            igFireBall1 = new Projectile(15, 1, 8, 0, projectile, time);
+            igFireBall2 = new Projectile(15, 2, -1, 7, projectile, time);
+            ig1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1, igFireBall1);
+            ig2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1, igFireBall2);
+            han1 = new Hanzo(0, 0, 100, 1, hanzoSprite, char1Proj1);
+            han2 = new Hanzo(7, 3, 100, 2, hanzoSprite, char2Proj1);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             p2charSelectImage = new Rectangle(510, 108, 140, 80);
-            char05TN = Content.Load<Texture2D>("Char0.5Thumbnail.png");
+            char05TN = Content.Load<Texture2D>("Character 2 Thumbnail");
             p1charSelectImage = new Rectangle(110, 108, 140, 80);
 
             // screen stuff
@@ -271,11 +279,21 @@ namespace Project_Kickass
 
                 ig1.Input(kState);
                 ig2.Input(kState);
+                han1.Input(kState);
+                han2.Input(kState);
                 if (char1Proj1.isColliding(ig2) == true)
                 {
                     Console.WriteLine(char1Proj1.Damage + " " + ig2.Health);
                     ig2.takeDamage(char1Proj1.Damage);
                 }
+
+                /*
+                if (igFireBall1.isColliding(ig2) == true)
+                {
+                    Console.WriteLine(igFireBall1.Damage + " " + ig2.Health);
+                    ig2.takeDamage(igFireBall1.Damage);
+                }
+                */
                 
                 if (char2Proj1.isColliding(ig1) == true)
                 {
@@ -361,10 +379,21 @@ namespace Project_Kickass
                 ig1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             }
 
+            if(selector1.P1Char == 1)
+            {
+                han1.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            }
+
             if (selector2.P2Char == 0)
             {
                 ig2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             }
+
+            if (selector2.P2Char == 1)
+            {
+                han2.Draw(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            }
+
             char1Proj1.Draw(spriteBatch);
             char2Proj1.Draw(spriteBatch);
 
