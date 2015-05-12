@@ -54,6 +54,7 @@ namespace Project_Kickass
         Texture2D sel2;
         Texture2D ignisTN;
         Texture2D char05TN;
+        Texture2D hanzoProj;
         public Texture2D projSkin;
         Vector2 characterPos;
         Texture2D projectile;
@@ -144,6 +145,9 @@ namespace Project_Kickass
             ignisInput.Close();
 
             //Hanzo
+            //Load projectile asset
+            hanzoProj = Content.Load<Texture2D>("Character 2 Projectile Spritesheet.png");
+
             //Read in Projectile Damage
             inputLine = hanzoInput.ReadLine();
             int.TryParse(inputLine, out hanzoProjDmg);
@@ -158,7 +162,7 @@ namespace Project_Kickass
             // character stuff
             hanzoSprite = Content.Load<Texture2D>("Standing Sprite.png");
             ignisSprite = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
-            projectile = Content.Load<Texture2D>("Projectile Sprite.png");
+            projectile = Content.Load<Texture2D>("Character 2 Projectile Spritesheet.png");
             characterPos = new Vector2(7, 75);
             time = new GameTime();
             char1Proj1 = new Projectile(10, 1, 8, 0, projectile, time);
@@ -404,7 +408,6 @@ namespace Project_Kickass
                     spriteBatch.Draw(pauseScreen, pauseSize, Color.White);
                     break;
             }
-
 
             spriteBatch.End();
 

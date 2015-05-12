@@ -29,6 +29,8 @@ namespace Project_Kickass
         private int frame = 0;
         private int framesPerBlock = 1;
 
+        Sprite hanzoProjectile; 
+
         //properties for attributes
         public int Player { get { return player; } }
         public int Damage 
@@ -70,6 +72,8 @@ namespace Project_Kickass
             isActive = false;
             projSkin = skin;
             timer = ti;
+
+            hanzoProjectile = new Sprite(skin, new Point(365, 365), new Vector2(XPos, yPos), 2, 30);
         }
 
         //fire method
