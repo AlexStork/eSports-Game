@@ -175,7 +175,7 @@ namespace Project_Kickass
                     {
                         //if (timer.ElapsedGameTime < 60)
                         {
-                            spritebatch.Draw(projSkin, new Vector2(xVal, yVal), Color.White);
+                            spritebatch.Draw(projSkin, new Vector2(xVal, yVal), null, Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.FlipHorizontally, 0);
                             //Tracks FPB to delay movement
                             frame++;
                             if (frame >= framesPerBlock)

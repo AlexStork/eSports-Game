@@ -218,3 +218,8 @@ D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bi
 D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Projectile Spritesheet.png
 D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Thumbnail.png
 D:\Users\ak3012\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\IgnisThumbnail.png
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Projectile Spritesheet.png
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Character 2 Thumbnail.png
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\IgnisThumbnail.png
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Hanzo Projectile.png
+D:\Users\sxm7686\Documents\eSports-Game\Main Project - eSports\Project Kickass\bin\WindowsGL\Debug\Content\Ignis Projectile.png

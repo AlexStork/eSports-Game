@@ -57,14 +57,18 @@ namespace Project_Kickass
         Texture2D tile;
         Texture2D hanzoSprite;
         Texture2D ignisSprite;
+        Texture2D steveSprite;
         Texture2D pauseScreen;
         Texture2D background;
         Texture2D frame;
         Texture2D sel1;
         Texture2D sel2;
         Texture2D ignisTN;
-        Texture2D char05TN;
+        Texture2D hanzoTN;
+        Texture2D steveTN;
+        Texture2D ignisProj;
         Texture2D hanzoProj;
+        Texture2D steveProj;
         public Texture2D projSkin;
         Vector2 characterPos;
         Texture2D projectile;
@@ -97,16 +101,25 @@ namespace Project_Kickass
         // keyboard state attribute
         KeyboardState kState;
 
-        //External Tool
+        //External Tool-----------------------------------------------------------------
         //Ignis
         StreamReader ignisInput = new StreamReader("ignis.txt");
+        int ignisHealth = 0;
         int ignisProjDmg = 0;
         int ignisFPB = 0;
 
         //Hanzo
         StreamReader hanzoInput = new StreamReader("hanzo.txt");
+        int hanzoHealth = 0;
         int hanzoProjDmg = 0;
         int hanzoFPB = 0;
+
+        //Steve
+        StreamReader steveInput = new StreamReader("steve.txt");
+        int steveHealth = 0;
+        int steveProjDmg = 0;
+        int steveFPB = 0;
+        //-------------------------------------------------------------------------------
 
         public Game1()
             : base()
@@ -144,8 +157,12 @@ namespace Project_Kickass
             //External Tool Values ----------------------------------------------
 
             //Ignis
-            //Read in Projectile Damage
+            //Read in Health Damage
             string inputLine = ignisInput.ReadLine();
+            int.TryParse(inputLine, out ignisHealth);
+
+            //Read in Projectile Damage
+            inputLine = ignisInput.ReadLine();
             int.TryParse(inputLine, out ignisProjDmg);
 
             //Read in FPB
@@ -154,9 +171,11 @@ namespace Project_Kickass
 
             ignisInput.Close();
 
+
             //Hanzo
-            //Load projectile asset
-            hanzoProj = Content.Load<Texture2D>("Projectile Sprite.png");
+            //Read in Health Damage
+            inputLine = hanzoInput.ReadLine();
+            int.TryParse(inputLine, out hanzoHealth);
 
             //Read in Projectile Damage
             inputLine = hanzoInput.ReadLine();
@@ -167,12 +186,32 @@ namespace Project_Kickass
             int.TryParse(inputLine, out hanzoFPB);
 
             hanzoInput.Close();
+
+
+            //Steve
+            //Read in Health Damage
+            inputLine = steveInput.ReadLine();
+            int.TryParse(inputLine, out steveHealth);
+
+            //Read in Projectile Damage
+            inputLine = steveInput.ReadLine();
+            int.TryParse(inputLine, out steveProjDmg);
+
+            //Read in FPB
+            inputLine = steveInput.ReadLine();
+            int.TryParse(inputLine, out steveFPB);
+
+            steveInput.Close();
             //-------------------------------------------------------------------
 
             // character stuff
             hanzoSprite = Content.Load<Texture2D>("Standing Sprite.png");
             ignisSprite = Content.Load<Texture2D>("Scaled Character 1 Standing Sprite.png");
+            steveSprite = Content.Load<Texture2D>("Steve Standing.png");
             projectile = Content.Load<Texture2D>("Projectile Sprite.png");
+            ignisProj = Content.Load<Texture2D>("Ignis Projectile.png");
+            hanzoProj = Content.Load<Texture2D>("Hanzo Projectile.png");
+            steveProj = Content.Load<Texture2D>("St3v3 Projectile.png");
             characterPos = new Vector2(7, 75);
             time = new GameTime();
             char1Proj1 = new Projectile(10, 1, 8, 0, projectile, time);
@@ -185,7 +224,7 @@ namespace Project_Kickass
             //han2 = new Hanzo(7, 3, 100, 2, hanzoSprite, char2Proj1);
             ignisTN = Content.Load<Texture2D>("IgnisThumbnail.png");
             p2charSelectImage = new Rectangle(510, 108, 140, 80);
-            char05TN = Content.Load<Texture2D>("Character 2 Thumbnail");
+            hanzoTN = Content.Load<Texture2D>("Character 2 Thumbnail");
             p1charSelectImage = new Rectangle(110, 108, 140, 80);
 
             // screen stuff
@@ -211,8 +250,8 @@ namespace Project_Kickass
             frame = Content.Load<Texture2D>("CharFrame.png"); // loads the character selector frame
             sel1 = Content.Load<Texture2D>("CharSel1.png"); // loads the character selector for player 1
             sel2 = Content.Load<Texture2D>("CharSel2.png"); // loads the character selector for player 2
-            selector1 = new SelectScreen(ignisTN, char05TN, sel1, frame, 1); // creates the character selector object for player 1
-            selector2 = new SelectScreen(ignisTN, char05TN, sel2, frame, 2); // creates the character selecter object for player 2
+            selector1 = new SelectScreen(ignisTN, hanzoTN, sel1, frame, 1); // creates the character selector object for player 1
+            selector2 = new SelectScreen(ignisTN, hanzoTN, sel2, frame, 2); // creates the character selecter object for player 2
         }
 
 
@@ -245,8 +284,7 @@ namespace Project_Kickass
                 {
                     case CharacterType.IGNIS: // Ignis
                         //Image
-                        //char1.Skin = ignisSprite;
-                        char1Proj1.ProjSkin = projectile; // set later to ignis projectile
+                        char1Proj1.ProjSkin = ignisProj; // set later to ignis projectile
 
                         //External Tool Values
                         char1Proj1.Damage = ignisProjDmg;
@@ -255,8 +293,7 @@ namespace Project_Kickass
 
                     case CharacterType.HANZO: // Hanzo
                         //Image
-                        //char1.Skin = hanzoSprite;
-                        char1Proj1.ProjSkin = projectile; // set later to hanzo projectile
+                        char1Proj1.ProjSkin = hanzoProj; // set later to hanzo projectile
 
                         //External Tool Values
                         char1Proj1.Damage = hanzoProjDmg;
@@ -268,8 +305,7 @@ namespace Project_Kickass
                 {
                     case CharacterType.IGNIS: // Ignis 
                         //Image
-                        //char2.Skin = ignisSprite;
-                        char2Proj1.ProjSkin = projectile; // set later to ignis projectile
+                        char2Proj1.ProjSkin = ignisProj; // set later to ignis projectile
                         
                         //External Tool Values
                         char2Proj1.Damage = ignisProjDmg;
@@ -278,8 +314,7 @@ namespace Project_Kickass
 
                     case CharacterType.HANZO: // Hanzo 
                         //Image
-                        //char2.Skin = hanzoSprite;
-                        char2Proj1.ProjSkin = projectile; // set later to hanzo projectile
+                        char2Proj1.ProjSkin = hanzoProj; // set later to hanzo projectile
 
                         //External Tool Values
                         char2Proj1.Damage = hanzoProjDmg;
@@ -297,13 +332,13 @@ namespace Project_Kickass
                     char2.takeDamage(char1Proj1.Damage);
                 }
 
-                /*
-                if (igFireBall1.isColliding(ig2) == true)
+                //Flame's Wake
+                if (igFireBall1.isColliding(char2) == true)
                 {
-                    Console.WriteLine(igFireBall1.Damage + " " + ig2.Health);
-                    ig2.takeDamage(igFireBall1.Damage);
+                    Console.WriteLine(igFireBall1.Damage + " " + char2.Health);
+                    char2.takeDamage(igFireBall1.Damage);
                 }
-                */
+                
                 
                 if (char2Proj1.isColliding(char1) == true)
                 {
@@ -335,23 +370,23 @@ namespace Project_Kickass
                     // Player 1 character load
                     if (selector1.PlayerChar == CharacterType.IGNIS)
                     {
-                        char1 = new Ignis(0, 0, 100, 1, ignisSprite, char1Proj1, igFireBall1);
+                        char1 = new Ignis(0, 0, ignisHealth, 1, ignisSprite, char1Proj1, igFireBall1);
                     }
 
                     if (selector1.PlayerChar == CharacterType.HANZO)
                     {
-                        char1 = new Hanzo(0, 0, 100, 1, hanzoSprite, char1Proj1);
+                        char1 = new Hanzo(0, 0, hanzoHealth, 1, hanzoSprite, char1Proj1);
                     }
 
                     // Player 2 character load
                     if (selector2.PlayerChar == CharacterType.IGNIS)
                     {
-                        char2 = new Ignis(7, 3, 100, 2, ignisSprite, char2Proj1, igFireBall2);
+                        char2 = new Ignis(7, 3, ignisHealth, 2, ignisSprite, char2Proj1, igFireBall2);
                     }
 
                     if (selector2.PlayerChar == CharacterType.HANZO)
                     {
-                        char2 = new Hanzo(7, 3, 100, 2, hanzoSprite, char2Proj1);
+                        char2 = new Hanzo(7, 3, hanzoHealth, 2, hanzoSprite, char2Proj1);
                     }
 
                 }
@@ -404,6 +439,7 @@ namespace Project_Kickass
             board.Draw(spriteBatch);
             char1Proj1.Draw(spriteBatch);
             char2Proj1.Draw(spriteBatch);
+            igFireBall1.Draw(spriteBatch);
 
             switch (gameState)
             {

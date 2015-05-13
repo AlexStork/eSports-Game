@@ -119,214 +119,214 @@ namespace Project_Kickass
 
         //move method and fire method
         //adjusts the xPos and yPos to determine which spot in array character occupies
-        public void Input(KeyboardState kstate)
-        {
+        public abstract void Input(KeyboardState kstate);
+        //{
             //player 1, left side of the board
-            if (player == 1)
-            {
-                if (dazed == false)
-                {
-                    if (canMove == true)
-                    {
-                        if (kstate.IsKeyDown(Keys.W))
-                        {
-                            if (yPos > 0)
-                            {
-                                yPos--;
-                                canMove = false;
-                                keyPress = "w";
-                            }
-                        }
+        //    if (player == 1)
+        //    {
+        //        if (dazed == false)
+        //        {
+        //            if (canMove == true)
+        //            {
+        //                if (kstate.IsKeyDown(Keys.W))
+        //                {
+        //                    if (yPos > 0)
+        //                    {
+        //                        yPos--;
+        //                        canMove = false;
+        //                        keyPress = "w";
+        //                    }
+        //                }
 
-                        if (kstate.IsKeyDown(Keys.A))
-                        {
-                            if (xPos > 0)
-                            {
-                                xPos--;
-                                canMove = false;
-                                keyPress = "a";
-                            }
-                        }
+        //                if (kstate.IsKeyDown(Keys.A))
+        //                {
+        //                    if (xPos > 0)
+        //                    {
+        //                        xPos--;
+        //                        canMove = false;
+        //                        keyPress = "a";
+        //                    }
+        //                }
 
-                        if (kstate.IsKeyDown(Keys.S))
-                        {
-                            if (yPos < 3)
-                            {
-                                yPos++;
-                                canMove = false;
-                                keyPress = "s";
-                            }
-                        }
+        //                if (kstate.IsKeyDown(Keys.S))
+        //                {
+        //                    if (yPos < 3)
+        //                    {
+        //                        yPos++;
+        //                        canMove = false;
+        //                        keyPress = "s";
+        //                    }
+        //                }
 
-                        if (kstate.IsKeyDown(Keys.D))
-                        {
-                            if (xPos < 3)
-                            {
-                                xPos++;
-                                canMove = false;
-                                keyPress = "d";
-                            }
-                        }
-                    }
-                }
+        //                if (kstate.IsKeyDown(Keys.D))
+        //                {
+        //                    if (xPos < 3)
+        //                    {
+        //                        xPos++;
+        //                        canMove = false;
+        //                        keyPress = "d";
+        //                    }
+        //                }
+        //            }
+        //        }
 
-                switch (keyPress)
-                {
-                    case "w":
-                        {
-                            if(kstate.IsKeyUp(Keys.W))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
-                    
-                    case "a":
-                        {
-                            if (kstate.IsKeyUp(Keys.A))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
+        //        switch (keyPress)
+        //        {
+        //            case "w":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.W))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
 
-                    case "s":
-                        {
-                            if (kstate.IsKeyUp(Keys.S))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
+        //            case "a":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.A))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
 
-                    case "d":
-                        {
-                            if (kstate.IsKeyUp(Keys.D))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
-                }
-                
-                if (!dazed)
-                {
-                    if (kstate.IsKeyDown(Keys.NumPad1))
-                    {
-                        if (bullet1.XPos > 7 || !bullet1.IsActive)
-                        {
-                            bullet1.XPos = this.xPos;
-                            bullet1.YPos = this.yPos;
-                            bullet1.Fire();
-                            PassiveAbility();
-                        }
-                    }
-                }
- 
-            }
+        //            case "s":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.S))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
 
-            //player 2 right side of board
-            //player 1, left side of the board
-            if (player == 2)
-            {
-                if (!dazed)
-                {
-                    if (canMove)
-                    {
-                        if (kstate.IsKeyDown(Keys.I))
-                        {
-                            if (yPos > 0)
-                            {
-                                yPos--;
-                                canMove = false;
-                                keyPress = "i";
-                            }
-                        }
+        //            case "d":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.D))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
+        //        }
 
-                        if (kstate.IsKeyDown(Keys.L))
-                        {
-                            if (xPos < 7)
-                            {
-                                xPos++;
-                                canMove = false;
-                                keyPress = "l";
-                            }
-                        }
+        //        if (!dazed)
+        //        {
+        //            if (kstate.IsKeyDown(Keys.NumPad1))
+        //            {
+        //                if (bullet1.XPos > 7 || !bullet1.IsActive)
+        //                {
+        //                    bullet1.XPos = this.xPos;
+        //                    bullet1.YPos = this.yPos;
+        //                    bullet1.Fire();
+        //                    PassiveAbility();
+        //                }
+        //            }
+        //        }
 
-                        if (kstate.IsKeyDown(Keys.K))
-                        {
-                            if (yPos < 3)
-                            {
-                                yPos++;
-                                canMove = false;
-                                keyPress = "k";
-                            }
-                        }
+        //    }
 
-                        if (kstate.IsKeyDown(Keys.J))
-                        {
-                            if (xPos > 4)
-                            {
-                                xPos--;
-                                canMove = false;
-                                keyPress = "j";
-                            }
-                        }
-                    }
-                }
-                switch (keyPress)
-                {
-                    case "i":
-                        {
-                            if (kstate.IsKeyUp(Keys.I))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
+        //    //player 2 right side of board
+        //    //player 1, left side of the board
+        //    if (player == 2)
+        //    {
+        //        if (!dazed)
+        //        {
+        //            if (canMove)
+        //            {
+        //                if (kstate.IsKeyDown(Keys.I))
+        //                {
+        //                    if (yPos > 0)
+        //                    {
+        //                        yPos--;
+        //                        canMove = false;
+        //                        keyPress = "i";
+        //                    }
+        //                }
 
-                    case "k":
-                        {
-                            if (kstate.IsKeyUp(Keys.K))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
+        //                if (kstate.IsKeyDown(Keys.L))
+        //                {
+        //                    if (xPos < 7)
+        //                    {
+        //                        xPos++;
+        //                        canMove = false;
+        //                        keyPress = "l";
+        //                    }
+        //                }
 
-                    case "j":
-                        {
-                            if (kstate.IsKeyUp(Keys.J))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
+        //                if (kstate.IsKeyDown(Keys.K))
+        //                {
+        //                    if (yPos < 3)
+        //                    {
+        //                        yPos++;
+        //                        canMove = false;
+        //                        keyPress = "k";
+        //                    }
+        //                }
 
-                    case "l":
-                        {
-                            if (kstate.IsKeyUp(Keys.L))
-                            {
-                                canMove = true;
-                            }
-                            break;
-                        }
-                }
-                
-                if (dazed == false)
-                {
-                    if (kstate.IsKeyDown(Keys.NumPad4))
-                    {
-                        if (bullet1.XPos < 0 || bullet1.IsActive == false)
-                        {
-                            bullet1.XPos = this.xPos;
-                            bullet1.YPos = this.yPos;
-                            bullet1.Fire();
-                        }
-                    }
-                }
-            }
-        }
+        //                if (kstate.IsKeyDown(Keys.J))
+        //                {
+        //                    if (xPos > 4)
+        //                    {
+        //                        xPos--;
+        //                        canMove = false;
+        //                        keyPress = "j";
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        switch (keyPress)
+        //        {
+        //            case "i":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.I))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
+
+        //            case "k":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.K))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
+
+        //            case "j":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.J))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
+
+        //            case "l":
+        //                {
+        //                    if (kstate.IsKeyUp(Keys.L))
+        //                    {
+        //                        canMove = true;
+        //                    }
+        //                    break;
+        //                }
+        //        }
+
+        //        if (dazed == false)
+        //        {
+        //            if (kstate.IsKeyDown(Keys.NumPad4))
+        //            {
+        //                if (bullet1.XPos < 0 || bullet1.IsActive == false)
+        //                {
+        //                    bullet1.XPos = this.xPos;
+        //                    bullet1.YPos = this.yPos;
+        //                    bullet1.Fire();
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         //Damage method
         public void takeDamage(int dmg)
@@ -337,7 +337,7 @@ namespace Project_Kickass
         // check to see if dazed
         public bool IsDazed()
         {
-            if(dazed == true)
+            if (dazed == true)
             {
                 return true;
             }

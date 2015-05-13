@@ -50,7 +50,7 @@ namespace Project_Kickass
             }
         }
 
-        /*Overwrite Input Method
+        //Overwrite Input Method
         public override void Input(KeyboardState kstate)
         {
             //player 1, left side of the board
@@ -280,6 +280,6 @@ namespace Project_Kickass
                     }
                 }
             }
-        }*/
+        }
     }
 }

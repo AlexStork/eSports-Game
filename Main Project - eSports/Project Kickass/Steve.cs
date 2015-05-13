@@ -11,9 +11,9 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Project_Kickass
 {
-    class Hanzo:Character
+    class Steve:Character
     {
-        public Hanzo(int x, int y, int hp, int play, Texture2D color, Projectile proj)
+        public Steve(int x, int y, int hp, int play, Texture2D color, Projectile proj)
             : base(x, y, hp, play, color, proj)
         {
 
